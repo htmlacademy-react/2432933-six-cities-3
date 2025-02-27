@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Maksim  Y](https://up.htmlacademy.ru/react-individual/3/user/2432933).
-* Наставник: `Неизвестно`.
+* Наставник: [Artem Novoselov](https://github.com/potyoma).
 
 ---
 
