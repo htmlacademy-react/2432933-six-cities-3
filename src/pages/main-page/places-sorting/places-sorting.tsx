@@ -3,8 +3,7 @@ import PlacesSortingItem from './components/places-sorting-item';
 
 const options : string [] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
-
-const PlacesSorting = () :JSX.Element => {
+const PlacesSorting = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeOption, setActiveOption] = useState<string>(options[0]);
 

@@ -1,4 +1,4 @@
-import { TypePlace } from './types/mock-data-type/mock-data-type';
+import { TypePlace } from './types/place-type/place-type';
 
 const MockOffers : TypePlace[] = [
   {

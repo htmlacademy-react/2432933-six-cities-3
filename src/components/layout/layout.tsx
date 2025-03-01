@@ -5,7 +5,7 @@ import { PageConfigContext } from './config-context/config-context';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
-const Layout = () :JSX.Element => {
+const Layout = () => {
   const config = usePageConfiguration();
 
   return (

@@ -3,7 +3,7 @@ import { PageConfigContext } from '../layout/config-context/config-context';
 import Logo from './components/logo';
 import Navigation from './components/navigation';
 
-const Header = () :JSX.Element => {
+const Header = () => {
   const { isShown, isActive } = useContext(PageConfigContext);
 
   return (

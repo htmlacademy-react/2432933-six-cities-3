@@ -1,4 +1,4 @@
-import { TypePlace } from '../../../types/mock-data-type/mock-data-type';
+import { TypePlace } from '../../../types/place-type/place-type';
 import PremiumMark from '../../../components/premium-mark/premium-mark';
 import PlacesCardInfo from '../../../components/places-card-info/places-card-info';
 
@@ -6,7 +6,7 @@ type PlacesListProps = {
   places: TypePlace[];
 };
 
-const PlacesList = ({ places } :PlacesListProps) :JSX.Element => (
+const PlacesList = ({ places } :PlacesListProps) => (
   <div className="cities__places-list places__list tabs__content">
     { places.map((place) => (
       <article key={ place.id } className="cities__card place-card">

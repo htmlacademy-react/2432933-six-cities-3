@@ -7,22 +7,22 @@ import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import { AppRoute, AuthorizationStatus } from '../const';
 
-const App = () :JSX.Element => (
+const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path = { AppRoute.Main } element = { <Layout /> }>
-        <Route index element = { <MainPage /> } />
-        <Route path = { AppRoute.Login } element = { <MainLogin/> } />
+      <Route path={ AppRoute.Main } element={ <Layout /> }>
+        <Route index element={ <MainPage /> } />
+        <Route path={ AppRoute.Login } element={ <MainLogin/> } />
         <Route
-          path = { AppRoute.Favorites }
-          element = {
+          path={ AppRoute.Favorites }
+          element={
             <PrivateRoute authorizationStatus = { AuthorizationStatus.NoAuth }>
               <Favorites />
             </PrivateRoute>
           }
         />
       </Route>
-      <Route path = "*" element = { <NoMainPage/> }/>
+      <Route path="*" element={ <NoMainPage/> }/>
     </Routes>
   </BrowserRouter>
 );

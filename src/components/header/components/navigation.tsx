@@ -1,14 +1,11 @@
-//import { Link } from 'react-router-dom';
-//import { useContext } from 'react';
-//import UserContext from '../layout/user-context';
 
 const User = {
   favoriteCount: 34,
   userName: 'Oliver.conner@gmail.com',
-}; // откуда получаем данные что бы подготовить компонент ?
+};
 
 // eslint-disable-next-line arrow-body-style
-const Navigation = () :JSX.Element=> {
+const Navigation = () => {
   return(
     <nav className="header__nav">
       <ul className="header__nav-list">

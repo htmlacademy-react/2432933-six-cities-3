@@ -5,7 +5,7 @@ type PlacesSortingItemProps = {
   onClick: (option: string) => void;
 }
 
-const PlacesSortingItem = ({activeOption, option , onClick} :PlacesSortingItemProps) :JSX.Element => (
+const PlacesSortingItem = ({activeOption, option , onClick} :PlacesSortingItemProps) => (
   <li className={` places__option  ${activeOption === option ? 'places__option--active' : ''} `}
     key={option}
     tabIndex={0}

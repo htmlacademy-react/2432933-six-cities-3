@@ -1,5 +1,5 @@
 
-const FormRegistration = () :JSX.Element => (
+const FormRegistration = () => (
   <form className="login__form form" action="#" method="post">
     <div className="login__input-wrapper form__input-wrapper">
       <label className="visually-hidden">E-mail</label>

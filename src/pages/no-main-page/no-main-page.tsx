@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './no-main-page.css';
 
-const NoMainPage = () :JSX.Element => (
+const NoMainPage = () => (
   <main className="page  no-page">
     <h1 className="visually-hidden"> No Cities</h1>
     <div className="section">
@@ -10,6 +10,6 @@ const NoMainPage = () :JSX.Element => (
       <Link className="back-home" to ='/'>Back to home</Link>
     </div>
   </main>
-); /* Добавить стили  */
+);
 
 export default NoMainPage;
