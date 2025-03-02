@@ -1,5 +1,5 @@
 import LocationsList from '../../components/locations-list/locations-list';
-import { MockOffers } from '../../mockOffers';
+import { MockOffers } from '../../mocks/offers/mockOffers';
 import CitiesPlaces from './cities/cities-places';
 import EmptyPlacesList from './cities/empty-places-list';
 
