@@ -18,7 +18,7 @@ type TypePlace = {
   isPremium: boolean;
   isFavorite: boolean;
   rating: number;
-  previewImage ?: string;
+  previewImage: string;
 };
 
 export type { TypePlace };
