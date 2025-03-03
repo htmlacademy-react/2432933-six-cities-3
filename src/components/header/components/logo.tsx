@@ -6,7 +6,6 @@ type LogoProps = {
 
 const Logo = ({isActive} :LogoProps) => {
   const isActiveValue = isActive ? 'header__logo-link--active' : '';
-
   return (
     <div className="header__left">
       <Link className={`header__logo-link ${isActiveValue}`} to="/">

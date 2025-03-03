@@ -11,7 +11,7 @@ const MainPage = () => (
     <LocationsList cities={ citiesMock } />
 
     <div className="cities">
-      { MockOffers.length === 0 ? <EmptyPlacesList /> : <CitiesPlaces places = {MockOffers} />}
+      { MockOffers.length === 0 ? <EmptyPlacesList /> : <CitiesPlaces places={MockOffers} />}
     </div>
   </main>
 );
