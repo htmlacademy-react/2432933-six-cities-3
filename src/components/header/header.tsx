@@ -1,12 +1,12 @@
 import Logo from './components/logo';
 import Navigation from './components/navigation';
-import { RequiredPageConfig } from '../../types/page-config/page-config';
+//import { RequiredPageConfig } from '../../types/page-config/page-config';
+import { useRouteConfig } from '../../hooks/use-route-config/use-route-config';
 
-type HeaderConfig = Pick<RequiredPageConfig, 'isShown' | 'isActive'>;
 
-const Header = ({isShown, isActive} :HeaderConfig) =>
-  //const {isShown, isActive} = config;
-  (
+const Header = () => {
+  const {isShown, isActive} = useRouteConfig();
+  return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -16,5 +16,6 @@ const Header = ({isShown, isActive} :HeaderConfig) =>
       </div>
     </header>
   );
+};
 
 export default Header;

@@ -9,9 +9,9 @@ type PlacesListProps = {
 };
 
 const PlacesList = ({ places } :PlacesListProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeCard, setActiveCard] = useState<string | null>(null);
-  //activeCard  для маркера карты
+
+  const [, setActiveCard] = useState<string | null>(null);
+  // позже добавить activeCard  для маркера карты
   return(
     <div className="cities__places-list places__list tabs__content">
       { places.map((place) => (

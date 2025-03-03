@@ -4,12 +4,11 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 
 const Layout = () => {
-  const {className, isShown, isActive, isShowFooter} = useRouteConfig();
+  const {className, isShowFooter} = useRouteConfig();
 
   return (
     <div className={`page ${className}`}>
-      <Header isShown={isShown} isActive={isActive}/> {/* лучше отдельные свйотва передавать
-                                                      или передать объект и внтури Header деструктуризировать isShown isActive*/}
+      <Header />
       <Outlet />
       {isShowFooter && <Footer />}
     </div>

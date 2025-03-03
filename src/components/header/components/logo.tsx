@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 type LogoProps = {
-  isActive : boolean;
+  isActive: boolean;
 }
 
 const Logo = ({isActive} :LogoProps) => {

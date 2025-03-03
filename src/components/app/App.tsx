@@ -7,8 +7,6 @@ import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import { AppRoute, AuthorizationStatus } from '../const';
 
-import { MockOffers } from '../../mocks/offers/mockOffers';
-
 const App = () => (
   <BrowserRouter>
     <Routes>
@@ -18,9 +16,8 @@ const App = () => (
         <Route
           path={ AppRoute.Favorites }
           element={
-            <PrivateRoute authorizationStatus = { AuthorizationStatus.NoAuth }>
-              <Favorites offers={MockOffers} /> {/* нам обязательно поулать тут данные в App или же я могу получать
-                                                 в компонентах там где они применяются */}
+            <PrivateRoute authorizationStatus={ AuthorizationStatus.NoAuth }>
+              <Favorites />
             </PrivateRoute>
           }
         />
