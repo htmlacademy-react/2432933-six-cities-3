@@ -1,21 +1,18 @@
-
 import { Outlet } from 'react-router-dom';
-import { usePageConfiguration } from './config-page/config';
-import { PageConfigContext } from './config-context/config-context';
+import { useRouteConfig } from '../../hooks/use-route-config/use-route-config';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
 const Layout = () => {
-  const config = usePageConfiguration();
+  const {className, isShowFooter} = useRouteConfig();
 
   return (
-    <PageConfigContext.Provider value={config}>
-      <div className={`page ${config.className}`}>
-        <Header />
-        <Outlet />
-        {config.isShowFooter && <Footer />}
-      </div>
-    </PageConfigContext.Provider>
+    <div className={`page ${className}`}>
+      <Header />
+      <Outlet />
+      {isShowFooter && <Footer />}
+    </div>
+
   );
 };
 

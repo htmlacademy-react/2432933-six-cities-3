@@ -1,5 +1,5 @@
 import LocationsList from '../../components/locations-list/locations-list';
-import { MockOffers } from '../../mockOffers';
+import { MockOffers } from '../../mocks/offers/mockOffers';
 import CitiesPlaces from './cities/cities-places';
 import EmptyPlacesList from './cities/empty-places-list';
 
@@ -11,7 +11,7 @@ const MainPage = () => (
     <LocationsList cities={ citiesMock } />
 
     <div className="cities">
-      { MockOffers.length === 0 ? <EmptyPlacesList /> : <CitiesPlaces places = {MockOffers} />}
+      { MockOffers.length === 0 ? <EmptyPlacesList /> : <CitiesPlaces places={MockOffers} />}
     </div>
   </main>
 );

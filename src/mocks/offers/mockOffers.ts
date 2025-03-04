@@ -1,4 +1,4 @@
-import { TypePlace } from './types/place-type/place-type';
+import { TypePlace } from '../../types/place-type/place-type';
 
 const MockOffers : TypePlace[] = [
   {
@@ -43,7 +43,7 @@ const MockOffers : TypePlace[] = [
       'longitude': 4.911976,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 2
   },
@@ -66,7 +66,7 @@ const MockOffers : TypePlace[] = [
       'longitude': 2.350499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 4.3
   },

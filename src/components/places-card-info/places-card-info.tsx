@@ -6,7 +6,7 @@ import ButtonFavorite from './components/button-favorite/button-favorite';
 type CardInfoProps = Pick<TypePlace, 'price' | 'isFavorite' | 'rating' | 'title' | 'type'>;
 
 const PlacesCardInfo = (place: CardInfoProps) => (
-  <div className="place-card__info">
+  <>
     <div className="place-card__price-wrapper">
       <PriceCard price={place.price} />
       <ButtonFavorite isFavorite={place.isFavorite} />
@@ -16,7 +16,7 @@ const PlacesCardInfo = (place: CardInfoProps) => (
       <a href="#">{ place.title }</a>
     </h2>
     <p className="place-card__type">{ place.type }</p>
-  </div>
+  </>
 );
 
 export default PlacesCardInfo;

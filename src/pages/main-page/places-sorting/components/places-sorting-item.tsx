@@ -2,7 +2,7 @@
 type PlacesSortingItemProps = {
   activeOption : string;
   option : string;
-  onClick: (option: string) => void;
+  onClick : (option: string) => void;
 }
 
 const PlacesSortingItem = ({activeOption, option , onClick} :PlacesSortingItemProps) => (
