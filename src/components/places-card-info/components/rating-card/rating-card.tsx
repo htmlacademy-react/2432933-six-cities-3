@@ -1,5 +1,5 @@
 const MAX_RATING = 5;
-const getRatingWidth = (rating: number): string => `${(Math.round(rating) / MAX_RATING) * 100}%`;
+const getRatingWidth = (rating: number) => `${(Math.round(rating) / MAX_RATING) * 100}%`;
 
 type RatingCardProps = {
   placeRating : number;

@@ -16,7 +16,7 @@ const App = () => (
         <Route
           path={ AppRoute.Favorites }
           element={
-            <PrivateRoute authorizationStatus = { AuthorizationStatus.NoAuth }>
+            <PrivateRoute authorizationStatus={ AuthorizationStatus.NoAuth }>
               <Favorites />
             </PrivateRoute>
           }
@@ -26,5 +26,6 @@ const App = () => (
     </Routes>
   </BrowserRouter>
 );
+
 
 export default App;

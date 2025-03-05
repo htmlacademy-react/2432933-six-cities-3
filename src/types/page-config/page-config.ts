@@ -5,4 +5,6 @@ type PageConfig = {
   isShowFooter ?: boolean;
 };
 
-export type { PageConfig};
+type RequiredPageConfig = Required<PageConfig>;
+
+export type { PageConfig, RequiredPageConfig};
