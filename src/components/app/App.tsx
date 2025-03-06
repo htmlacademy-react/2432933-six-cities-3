@@ -5,6 +5,7 @@ import MainLogin from '../../pages/main-login/main-login';
 import NoMainPage from '../../pages/no-main-page/no-main-page';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
+import Offer from '../../pages/offer/offer';
 import { AppRoute, AuthorizationStatus } from '../const';
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
             </PrivateRoute>
           }
         />
+        <Route path={ AppRoute.Offer } element={ <Offer/> } />
       </Route>
       <Route path="*" element={ <NoMainPage/> }/>
     </Routes>

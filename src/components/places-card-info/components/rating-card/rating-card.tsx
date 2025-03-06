@@ -1,5 +1,4 @@
-const MAX_RATING = 5;
-const getRatingWidth = (rating: number) => `${(Math.round(rating) / MAX_RATING) * 100}%`;
+import { calculateRatingWidth } from '../../../../utils/calculate-rating-width';
 
 type RatingCardProps = {
   placeRating : number;
@@ -8,7 +7,7 @@ type RatingCardProps = {
 const RatingCard = ({placeRating}: RatingCardProps) => (
   <div className="place-card__rating rating">
     <div className="place-card__stars rating__stars">
-      <span style={{ width: getRatingWidth(placeRating)}}></span>
+      <span style={{ width: calculateRatingWidth(placeRating)}}></span>
       <span className="visually-hidden">Rating</span>
     </div>
   </div>
