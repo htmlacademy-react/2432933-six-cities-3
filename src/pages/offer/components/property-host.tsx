@@ -1,14 +1,11 @@
+import { Host } from '../../../types/offer-type/host';
 
 type HostProps = {
-  host : {
-    isPro : boolean;
-    name: string;
-    avatarUrl: string;
-   };
-   description: string;
+  host: Host;
+  description: string;
   }
 
-const Host = ({host, description} :HostProps) => {
+const PropertyHost = ({host, description} :HostProps) => {
   const proClass = host.isPro ? 'offer__avatar-wrapper--pro' : '';
   return (
     <div className="offer__host">
@@ -33,4 +30,4 @@ const Host = ({host, description} :HostProps) => {
   );
 };
 
-export default Host;
+export default PropertyHost;

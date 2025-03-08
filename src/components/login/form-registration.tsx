@@ -1,4 +1,4 @@
-import { useForm } from '../../hooks/use-route-config/use-form';
+import { useForm } from '../../hooks/use-form/use-form';
 import { FormEvent, ChangeEvent } from 'react';
 
 const FormRegistration = () => {

@@ -1,19 +1,4 @@
-import { TypePlace } from '../../types/place-type/place-type';
-
-type Host = {
-      isPro : boolean;
-      name: string;
-      avatarUrl: string;
-}
-
-type Offer = Omit<TypePlace, 'previewImage'> & {
-  description: string;
-  images: string[];
-  goods: string[];
-  host: Host;
-  bedrooms: number;
-  maxAdults: number;
-}
+import { Offer } from '../../types/offer-type/offer-type';
 
 const MockOffer :Offer = {
   'id': '8ad2908a-e9de-4f2d-9e00-3df600c34582',

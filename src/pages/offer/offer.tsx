@@ -5,7 +5,7 @@ import Name from './components/name';
 import Rating from './components/rating';
 import Features from './components/features';
 import Inside from './components/inside';
-import Host from './components/host';
+import PropertyHost from './components/property-host';
 import Reviews from './components/reviews/reviews';
 import PlacesList from './components/places-list';
 import { MockOffers } from '../../mocks/offers/mockOffers';
@@ -28,9 +28,9 @@ const Offer = () => (
             <b className="offer__price-value">&euro;{MockOffer.price}</b>
             <span className="offer__price-text">&nbsp;night</span>
           </div>
-          <Inside insides={MockOffer.goods} />
+          <Inside benefits={MockOffer.goods} />
 
-          <Host host={MockOffer.host} description={MockOffer.description} />
+          <PropertyHost host={MockOffer.host} description={MockOffer.description} />
           <Reviews />
         </div>
       </div>

@@ -4,7 +4,7 @@ import PremiumMark from '../../../components/premium-mark/premium-mark';
 import PlacesCardImage from '../../../components/place-card-image/place-card-image';
 import PlacesCardInfo from '../../../components/places-card-info/places-card-info';
 
-const MAX_SENTENCES = 3;
+const MAX_PLACES = 3;
 
 type PlacesListProps = {
   places: TypePlace[];
@@ -19,7 +19,7 @@ const PlacesList = ({ places } :PlacesListProps) => {
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighborhood</h2>
         <div className="near-places__list places__list">
-          { places.slice(0, MAX_SENTENCES).map((place) => (
+          { places.slice(0, MAX_PLACES).map((place) => (
             <article
               key={ place.id }
               className="cities__card place-card"

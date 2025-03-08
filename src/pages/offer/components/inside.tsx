@@ -1,14 +1,14 @@
 type InsideProps = {
-  insides : string[];
+  benefits : string[];
 }
 
-const Inside = ({insides} :InsideProps) => (
+const Inside = ({benefits} :InsideProps) => (
   <div className="offer__inside">
     <h2 className="offer__inside-title">What&apos;s inside</h2>
     <ul className="offer__inside-list">
-      {insides.map((inside) => (
-        <li className="offer__inside-item" key={inside}>
-          {inside}
+      {benefits.map((benefit) => (
+        <li className="offer__inside-item" key={benefit}>
+          {benefit}
         </li>
       ))}
     </ul>

@@ -1,6 +1,6 @@
 import { FormEvent, } from 'react';
 import IconStar from './icon-star';
-import { useForm } from '../../../../../hooks/use-route-config/use-form';
+import { useForm } from '../../../../../hooks/use-form/use-form';
 
 const FormReviews = () => {
   const { values, setFieldValue } = useForm({review: '', rating: 0});
@@ -15,11 +15,6 @@ const FormReviews = () => {
     setFieldValue('rating', rating);
   };
 
-  /*   const handleReviewChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setFieldValue('review', event.target.value);
-  }; */
-
-
   return (
     <form
       className="reviews__form form"
@@ -32,7 +27,7 @@ const FormReviews = () => {
         className="reviews__textarea form__textarea"
         id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={(event) => setFieldValue('review', event.target.value)} /* практичней функцией(handleReviewChange) или сразу вызывать тут и переавать значения ? */
+        onChange={(event) => setFieldValue('review', event.target.value)}
       >
 
       </textarea>
@@ -43,7 +38,6 @@ const FormReviews = () => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          /* как можно валидировать форму на disabled ?  */
         >
           Submit
         </button>

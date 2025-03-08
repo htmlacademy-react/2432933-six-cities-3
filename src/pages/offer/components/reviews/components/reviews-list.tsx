@@ -1,22 +1,9 @@
 import { calculateRatingWidth } from '../../../../../utils/calculate-rating-width';
+import { Comment } from '../../../../../types/offer-type/comment-type';
 
-const formatDate = (dateString: string): string => {
+const formatDate = (dateString: string) :string => {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-};
-
-type User = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-};
-
-type Comment = {
-  id: string;
-  comment: string;
-  date: string;
-  rating: number;
-  user: User;
 };
 
 type ReviewsListProps = {

@@ -18,7 +18,7 @@ const PlacesList = ({ places } :PlacesListProps) => {
         <article
           key={ place.id }
           className="cities__card place-card"
-          onMouseEnter = {() => setActiveCard(place.id)} /* тут лучше функцию handle для этих дейтсвий place.id || null ? */
+          onMouseEnter = {() => setActiveCard(place.id)}
           onMouseLeave = {() => setActiveCard(null)}
         >
           { place.isPremium && <PremiumMark /> }
