@@ -24,7 +24,7 @@ const PlacesList = ({ places } :PlacesListProps) => {
           { place.isPremium && <PremiumMark /> }
 
           <div className="cities__image-wrapper place-card__image-wrapper">
-            <PlacesCardImage image={place.previewImage} />
+            <PlacesCardImage image={place.previewImage} link={`/offer/${place.id}`}/>
             <div className="place-card__info">
               <PlacesCardInfo {...place} />
             </div>
