@@ -1,27 +1,14 @@
 import { useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map/use-map';
 import { Location, TypePlace } from '../../types/place-type/place-type';
-import {Icon, Marker, layerGroup} from 'leaflet';
-import iconDefault from './defaultCustomIcon.svg';
-import iconCurrent from './currentCustomIcon.svg';
+import { Marker, layerGroup } from 'leaflet';
+import { defaultCustomIcon, currentCustomIcon } from './const';
 
 type CitiesMapProps = {
   location: Location;
   offers: TypePlace[];
   currentId: string | null;
 }
-
-const defaultCustomIcon = new Icon({
-  iconUrl: iconDefault,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl:  iconCurrent,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
 
 const CitiesMap = ({ location, offers, currentId} :CitiesMapProps) => {
   const mapRef = useRef(null);
@@ -40,13 +27,7 @@ const CitiesMap = ({ location, offers, currentId} :CitiesMapProps) => {
         lng: offer.location.longitude,
       });
 
-      marker
-        .setIcon(
-          currentId !== null && offer.id === currentId
-            ? currentCustomIcon
-            : defaultCustomIcon
-        )
-        .addTo(markerLayer);
+      marker.setIcon(offer.id === currentId ? currentCustomIcon : defaultCustomIcon).addTo(markerLayer);
     });
 
     return () => {

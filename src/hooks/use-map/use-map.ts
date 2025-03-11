@@ -4,9 +4,15 @@ import { TileLayer } from 'leaflet';
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
 import { Location } from '../../types/place-type/place-type';
 
-type MpRefProps = MutableRefObject<HTMLElement | null>
+const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+const TILE_LAYER_ATTRIBUTION = `
+  &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
+  &copy; <a href="https://carto.com/attributions"></a>
+`;
 
-const useMap = (mapRef :MpRefProps, location :Location) => {
+type MapRefProps = MutableRefObject<HTMLElement | null>
+
+const useMap = (mapRef :MapRefProps, location :Location) => {
   const [map, setMap] = useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef(false);
 
@@ -17,13 +23,7 @@ const useMap = (mapRef :MpRefProps, location :Location) => {
         zoom: location.zoom,
       });
 
-      const layer = new TileLayer(
-        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        }
-      );
+      const layer = new TileLayer(TILE_LAYER_URL,{ attribution: TILE_LAYER_ATTRIBUTION });
 
       instance.addLayer(layer);
 
@@ -32,7 +32,6 @@ const useMap = (mapRef :MpRefProps, location :Location) => {
 
     }
   }, [mapRef, location]);
-
 
   return map;
 };
