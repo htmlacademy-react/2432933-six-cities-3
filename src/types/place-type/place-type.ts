@@ -3,6 +3,7 @@ type Location = {
   longitude: number;
   zoom: number;
 }
+
 type City = {
   name: string;
   location: Location;
@@ -21,5 +22,5 @@ type TypePlace = {
   previewImage: string;
 };
 
-export type { TypePlace };
+export type { TypePlace, Location };
 
