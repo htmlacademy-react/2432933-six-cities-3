@@ -17,7 +17,6 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
   };
 
   const currentList = places.filter((place) => place.city.name === currentFilterCity);
-  const firstPlace = currentList[0].city.location;
 
   return(
     <div className="cities__places-container container">
@@ -28,7 +27,9 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
         <PlacesSorting />
         <PlacesList places={currentList} onActiveCardChange={handleActiveCardChange}/>
       </section>
-      <CitiesMap location={firstPlace} offers={currentList} currentId={activeCard}/>
+      <div className="cities__right-section">
+        <CitiesMap offers={currentList} currentId={activeCard} className={'cities__map map'}/>
+      </div>
     </div>
   );
 };

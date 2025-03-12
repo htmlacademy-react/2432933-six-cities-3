@@ -1,15 +1,21 @@
 import { TypePlace } from '../../../types/place-type/place-type';
 import PremiumMark from '../../../components/premium-mark/premium-mark';
-import PlacesCardImage from '../../../components/place-card-image/place-card-image';
 import PlacesCardInfo from '../../../components/places-card-info/places-card-info';
+import PlacesCardImage from '../../../components/place-card-image/place-card-image';
 
 type PlacesListProps = {
   places: TypePlace[];
   onActiveCardChange: (id: string | null) => void;
+  classes: Classes;
 };
 
-const PlacesList = ({ places, onActiveCardChange } :PlacesListProps) => (
-  <div className="near-places__list places__list">
+type Classes = {
+  container: string;
+  imageWrapper: string;
+}
+
+const PlacesListTest = ({ places, onActiveCardChange, classes } :PlacesListProps) => (
+  <div className={classes.container}>
     { places.map((place) => (
       <article
         key={ place.id }
@@ -18,9 +24,9 @@ const PlacesList = ({ places, onActiveCardChange } :PlacesListProps) => (
         onMouseLeave = {() => onActiveCardChange(null)}
       >
         { place.isPremium && <PremiumMark /> }
-        <div className="near-places__image-wrapper place-card__image-wrapper">
-          <PlacesCardImage image={place.previewImage} link={`/offer/${place.id}`}/>
 
+        <div className={classes.imageWrapper}>
+          <PlacesCardImage image={place.previewImage} link={`/offer/${place.id}`}/>
           <div className="place-card__info">
             <PlacesCardInfo {...place} />
           </div>
@@ -28,7 +34,6 @@ const PlacesList = ({ places, onActiveCardChange } :PlacesListProps) => (
       </article>
     ))}
   </div>
-
 );
 
-export default PlacesList;
+export default PlacesListTest;
