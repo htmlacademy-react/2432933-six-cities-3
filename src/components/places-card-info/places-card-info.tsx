@@ -13,7 +13,7 @@ const PlacesCardInfo = (place: CardInfoProps) => (
     </div>
     <RatingCard placeRating={place.rating} />
     <h2 className="place-card__name">
-      <a href="#">{ place.title }</a>
+      { place.title }
     </h2>
     <p className="place-card__type">{ place.type }</p>
   </>

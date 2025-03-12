@@ -19,7 +19,7 @@ const PlacesList = ({ places, onActiveCardChange } :PlacesListProps) => (
       >
         { place.isPremium && <PremiumMark /> }
         <div className="near-places__image-wrapper place-card__image-wrapper">
-          <PlacesCardImage image={place.previewImage} link={`/offer/${place.id}`}/>
+          <PlacesCardImage image={place.previewImage}/>
 
           <div className="place-card__info">
             <PlacesCardInfo {...place} />
