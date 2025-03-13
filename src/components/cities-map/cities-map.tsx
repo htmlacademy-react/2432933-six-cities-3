@@ -1,18 +1,19 @@
 import { useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map/use-map';
-import { TypePlace } from '../../types/place-type/place-type';
+import { TypePlace, Location } from '../../types/place-type/place-type';
 import { Marker, layerGroup } from 'leaflet';
-import { defaultCustomIcon, currentCustomIcon } from './const';
+import { defaultCustomIcon, currentCustomIcon, activeCustomIcon } from './const';
 
 type CitiesMapProps = {
   offers: TypePlace[];
   currentId: string | null;
   className: string;
+  currentMarker?: Location;
 }
 
-const CitiesMap = ({ offers, currentId, className } :CitiesMapProps) => {
+const CitiesMap = ({ offers, currentId, className, currentMarker} :CitiesMapProps) => {
   const mapRef = useRef(null);
-  const location = offers[0].city.location; // центр же одинаковый у всех локаций, как я поннимаю. или лучше среднее значение находить ?
+  const location = offers[0].city.location;
   const citiesMap = useMap(mapRef, location);
 
   useEffect(() => {
@@ -31,10 +32,19 @@ const CitiesMap = ({ offers, currentId, className } :CitiesMapProps) => {
       marker.setIcon(offer.id === currentId ? currentCustomIcon : defaultCustomIcon).addTo(markerLayer);
     });
 
+
+    if (currentMarker) {
+      const marker = new Marker({
+        lat: currentMarker.latitude,
+        lng: currentMarker.longitude,
+      });
+      marker.setIcon(activeCustomIcon).addTo(markerLayer);
+    }
+
     return () => {
       markerLayer.clearLayers();
     };
-  }, [citiesMap, currentId, offers]);
+  }, [citiesMap, currentId, offers, currentMarker]);
 
   return (
     <section className={className} ref={mapRef}></section>

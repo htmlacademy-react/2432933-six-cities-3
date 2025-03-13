@@ -8,10 +8,10 @@ import Features from './components/features';
 import Inside from './components/inside';
 import PropertyHost from './components/property-host';
 import Reviews from './components/reviews/reviews';
-//import PlacesList from './components/places-list';
+import PlacesList from '../../components/places-list/places-list';
 import { MockOffers } from '../../mocks/offers/mockOffers';
 import CitiesMap from '../../components/cities-map/cities-map';
-import PlacesListTest from '../main-page/places-list/test';
+
 
 const MAX_PLACES = 3;
 
@@ -47,19 +47,19 @@ const Offer = () => {
             <Reviews />
           </div>
         </div>
-        <CitiesMap offers={firstFewOffers} currentId={activeCard} className={'offer__map map'}/>
+        <CitiesMap offers={firstFewOffers} currentId={activeCard} className={'offer__map map'} currentMarker={MockOffer.location}/>
       </section>
 
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighborhood</h2>
 
-          <PlacesListTest
+          <PlacesList
             places={firstFewOffers}
             onActiveCardChange={handleActiveCardChange}
             classes={{
-              container: 'cities__places-list places__list tabs__content',
-              imageWrapper: 'cities__image-wrapper place-card__image-wrapper'
+              container: 'near-places__list places__list',
+              imageWrapper: 'near-places__image-wrapper place-card__image-wrapper'
             }}
           />
         </section>

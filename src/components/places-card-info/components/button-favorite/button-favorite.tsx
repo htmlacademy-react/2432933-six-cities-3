@@ -1,4 +1,4 @@
-
+import { receivesClassName } from '../../../../utils/receives-class-name';
 
 type ButtonFavoriteProps = {
   isFavorite :boolean;
@@ -6,10 +6,10 @@ type ButtonFavoriteProps = {
 
 const ButtonFavorite = ({isFavorite}:ButtonFavoriteProps) => (
   <button
-    className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`}
+    className={`place-card__bookmark-button button ${receivesClassName(isFavorite, 'place-card__bookmark-button--active')}`}
     type="button"
-    onClick={(e) => {
-      e.preventDefault();
+    onClick={(evt) => {
+      evt.preventDefault();
     }}
   >
     <svg className="place-card__bookmark-icon" width="18" height="19">
