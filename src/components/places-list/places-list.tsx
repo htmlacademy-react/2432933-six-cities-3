@@ -1,10 +1,10 @@
+import { Link } from 'react-router-dom';
 import { TypePlace } from '../../types/place-type/place-type';
-import LinkWrapper from '../link-wrapper/link-wrapper';
 import PremiumMark from '../premium-mark/premium-mark';
 import PlacesCardImage from '../place-card-image/place-card-image';
 import PlacesCardInfo from '../places-card-info/places-card-info';
 
-type Classes = {
+type classNames = {
   container: string;
   imageWrapper: string;
 }
@@ -12,11 +12,11 @@ type Classes = {
 type PlacesListProps = {
   places: TypePlace[];
   onActiveCardChange: (id: string | null) => void;
-  classes: Classes;
+  classNames: classNames;
 };
 
-const PlacesList = ({ places, onActiveCardChange, classes } :PlacesListProps) => (
-  <div className={classes.container}>
+const PlacesList = ({ places, onActiveCardChange, classNames } :PlacesListProps) => (
+  <div className={classNames.container}>
     { places.map((place) => (
       <article
         key={ place.id }
@@ -24,16 +24,16 @@ const PlacesList = ({ places, onActiveCardChange, classes } :PlacesListProps) =>
         onMouseEnter = {() => onActiveCardChange(place.id)}
         onMouseLeave = {() => onActiveCardChange(null)}
       >
-        <LinkWrapper link={`/offer/${place.id}`} >
+        <Link to={`/offer/${place.id}`} >
           { place.isPremium && <PremiumMark /> }
 
-          <div className={classes.imageWrapper}>
+          <div className={classNames.imageWrapper}>
             <PlacesCardImage image={place.previewImage}/>
             <div className="place-card__info">
               <PlacesCardInfo {...place} />
             </div>
           </div>
-        </LinkWrapper>
+        </Link>
       </article>
     ))}
   </div>

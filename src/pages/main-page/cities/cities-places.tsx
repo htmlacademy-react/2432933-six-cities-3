@@ -28,7 +28,7 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
         <PlacesList
           places={currentList}
           onActiveCardChange={handleActiveCardChange}
-          classes={{
+          classNames={{
             container: 'cities__places-list places__list tabs__content',
             imageWrapper: 'cities__image-wrapper place-card__image-wrapper'
           }}

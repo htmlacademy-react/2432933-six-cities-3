@@ -1,4 +1,4 @@
-import { receivesClassName } from '../../../../utils/receives-class-name';
+import clsx from 'clsx';
 
 type ButtonFavoriteProps = {
   isFavorite :boolean;
@@ -6,7 +6,8 @@ type ButtonFavoriteProps = {
 
 const ButtonFavorite = ({isFavorite}:ButtonFavoriteProps) => (
   <button
-    className={`place-card__bookmark-button button ${receivesClassName(isFavorite, 'place-card__bookmark-button--active')}`}
+    className={`place-card__bookmark-button button ${clsx({'place-card__bookmark-button--active' : isFavorite})}`}
+
     type="button"
     onClick={(evt) => {
       evt.preventDefault();

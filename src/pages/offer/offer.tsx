@@ -57,7 +57,7 @@ const Offer = () => {
           <PlacesList
             places={firstFewOffers}
             onActiveCardChange={handleActiveCardChange}
-            classes={{
+            classNames={{
               container: 'near-places__list places__list',
               imageWrapper: 'near-places__image-wrapper place-card__image-wrapper'
             }}
