@@ -1,17 +1,19 @@
 import { useRef, useEffect} from 'react';
 import useMap from '../../hooks/use-map/use-map';
-import { Location, TypePlace } from '../../types/place-type/place-type';
+import { TypePlace, Location } from '../../types/place-type/place-type';
 import { Marker, layerGroup } from 'leaflet';
-import { defaultCustomIcon, currentCustomIcon } from './const';
+import { defaultCustomIcon, currentCustomIcon, activeCustomIcon } from './const';
 
 type CitiesMapProps = {
-  location: Location;
   offers: TypePlace[];
   currentId: string | null;
+  className: string;
+  currentMarker?: Location;
 }
 
-const CitiesMap = ({ location, offers, currentId} :CitiesMapProps) => {
+const CitiesMap = ({ offers, currentId, className, currentMarker} :CitiesMapProps) => {
   const mapRef = useRef(null);
+  const location = offers[0].city.location;
   const citiesMap = useMap(mapRef, location);
 
   useEffect(() => {
@@ -30,15 +32,22 @@ const CitiesMap = ({ location, offers, currentId} :CitiesMapProps) => {
       marker.setIcon(offer.id === currentId ? currentCustomIcon : defaultCustomIcon).addTo(markerLayer);
     });
 
+
+    if (currentMarker) {
+      const marker = new Marker({
+        lat: currentMarker.latitude,
+        lng: currentMarker.longitude,
+      });
+      marker.setIcon(activeCustomIcon).addTo(markerLayer);
+    }
+
     return () => {
       markerLayer.clearLayers();
     };
-  }, [citiesMap, currentId, offers]);
+  }, [citiesMap, currentId, offers, currentMarker]);
 
   return (
-    <div className="cities__right-section">
-      <section className="cities__map map" ref={mapRef}></section>
-    </div>
+    <section className={className} ref={mapRef}></section>
   );
 };
 

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 
 type ButtonFavoriteProps = {
   isFavorite :boolean;
@@ -5,8 +6,12 @@ type ButtonFavoriteProps = {
 
 const ButtonFavorite = ({isFavorite}:ButtonFavoriteProps) => (
   <button
-    className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`}
+    className={`place-card__bookmark-button button ${clsx({'place-card__bookmark-button--active' : isFavorite})}`}
+
     type="button"
+    onClick={(evt) => {
+      evt.preventDefault();
+    }}
   >
     <svg className="place-card__bookmark-icon" width="18" height="19">
       <use xlinkHref="#icon-bookmark"></use>

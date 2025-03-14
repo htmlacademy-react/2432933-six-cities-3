@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PlacesList from '../places-list/places-list';
+import PlacesList from '../../../components/places-list/places-list';
 import PlacesSorting from '../places-sorting/places-sorting';
 import { TypePlace } from '../../../types/place-type/place-type';
 import CitiesMap from '../../../components/cities-map/cities-map';
@@ -17,7 +17,6 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
   };
 
   const currentList = places.filter((place) => place.city.name === currentFilterCity);
-  const firstPlace = currentList[0].city.location;
 
   return(
     <div className="cities__places-container container">
@@ -26,9 +25,18 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
         <b className="places__found">{currentList.length} places to stay in {currentFilterCity}</b>
 
         <PlacesSorting />
-        <PlacesList places={currentList} onActiveCardChange={handleActiveCardChange}/>
+        <PlacesList
+          places={currentList}
+          onActiveCardChange={handleActiveCardChange}
+          classNames={{
+            container: 'cities__places-list places__list tabs__content',
+            imageWrapper: 'cities__image-wrapper place-card__image-wrapper'
+          }}
+        />
       </section>
-      <CitiesMap location={firstPlace} offers={currentList} currentId={activeCard}/>
+      <div className="cities__right-section">
+        <CitiesMap offers={currentList} currentId={activeCard} className={'cities__map map'}/>
+      </div>
     </div>
   );
 };
