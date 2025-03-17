@@ -4,29 +4,29 @@ import PlacesSorting from '../places-sorting/places-sorting';
 import { TypePlace } from '../../../types/place-type/place-type';
 import CitiesMap from '../../../components/cities-map/cities-map';
 
+
 type PlacesListProps = {
-  places : TypePlace[];
+  places: TypePlace[];
+  cityName: string;
 };
 
-const currentFilterCity = 'Amsterdam';
-const CitiesPlaces = ({ places } :PlacesListProps) => {
+
+const CitiesPlaces = ({ places, cityName } :PlacesListProps) => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   const handleActiveCardChange = (id: string | null) => {
     setActiveCard(id);
   };
 
-  const currentList = places.filter((place) => place.city.name === currentFilterCity);
-
   return(
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{currentList.length} places to stay in {currentFilterCity}</b>
+        <b className="places__found">{places.length} places to stay in {cityName}</b>
 
         <PlacesSorting />
         <PlacesList
-          places={currentList}
+          places={places}
           onActiveCardChange={handleActiveCardChange}
           classNames={{
             container: 'cities__places-list places__list tabs__content',
@@ -35,7 +35,7 @@ const CitiesPlaces = ({ places } :PlacesListProps) => {
         />
       </section>
       <div className="cities__right-section">
-        <CitiesMap offers={currentList} currentId={activeCard} className={'cities__map map'}/>
+        <CitiesMap offers={places} currentId={activeCard} className={'cities__map map'}/>
       </div>
     </div>
   );

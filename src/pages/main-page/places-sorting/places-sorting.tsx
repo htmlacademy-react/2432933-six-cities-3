@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import PlacesSortingItem from './components/places-sorting-item';
+import clsx from 'clsx';
+import { useAppDispatch, useAppSelector} from '../../../hooks/use-app-redux/use-app-redux';
+import { setSorting } from '../../../store/offers/offers-reducer';
 
 const options : string [] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 const PlacesSorting = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeOption, setActiveOption] = useState<string>(options[0]);
+  const dispatch = useAppDispatch();
+  const selectSort = useAppSelector((state) => state.offers.sorting);
 
   const handleOptionClick = (option : string) => {
-    setActiveOption(option);
     setIsOpen(!isOpen);
+    dispatch(setSorting(option));
   };
 
   return (
@@ -20,19 +23,22 @@ const PlacesSorting = () => {
         tabIndex={0}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {activeOption}
+        {selectSort}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : '' }`}>
+      <ul className={`places__options places__options--custom ${clsx({'places__options--opened':  isOpen})}`}>
         {options.map((option) => (
-          <PlacesSortingItem
+
+          <li className={` places__option  ${ clsx({'places__option--active' : selectSort === option }) } `}
             key={option}
-            option={option}
-            activeOption={activeOption}
-            onClick={handleOptionClick}
-          />
+            tabIndex={0}
+            onClick={() => handleOptionClick(option)}
+          >
+            {option}
+          </li>
+
         )
         )}
       </ul>

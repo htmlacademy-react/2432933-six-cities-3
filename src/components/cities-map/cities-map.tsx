@@ -13,14 +13,16 @@ type CitiesMapProps = {
 
 const CitiesMap = ({ offers, currentId, className, currentMarker} :CitiesMapProps) => {
   const mapRef = useRef(null);
-  const location = offers[0].city.location;
-  const citiesMap = useMap(mapRef, location);
+
+  const centerLocation = offers[0].city.location;
+  const citiesMap = useMap(mapRef, centerLocation);
 
   useEffect(() => {
     if (!citiesMap) {
       return;
     }
 
+    citiesMap.setView([centerLocation.latitude, centerLocation.longitude], centerLocation.zoom);
     const markerLayer = layerGroup().addTo(citiesMap);
 
     offers.forEach((offer) => {
@@ -44,12 +46,11 @@ const CitiesMap = ({ offers, currentId, className, currentMarker} :CitiesMapProp
     return () => {
       markerLayer.clearLayers();
     };
-  }, [citiesMap, currentId, offers, currentMarker]);
+  }, [centerLocation, citiesMap, currentId, offers, currentMarker ]);
 
   return (
     <section className={className} ref={mapRef}></section>
   );
 };
-
 
 export default CitiesMap;
