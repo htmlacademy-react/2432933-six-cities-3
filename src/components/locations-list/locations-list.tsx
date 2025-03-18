@@ -1,12 +1,21 @@
-type LocationsProps = { cities: string[] };
+import clsx from 'clsx';
+import { cities } from '../const';
 
-const LocationsList = ({ cities } :LocationsProps) => (
+type LocationsProps = {
+  cityName : string;
+  handleFilter: (city: string) => void;
+ };
+
+const LocationsList = ({cityName, handleFilter} :LocationsProps) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {cities.map((city) => (
           <li className="locations__item" key={city}>
-            <a className="locations__item-link">
+            <a
+              className={clsx('locations__item-link tabs__item', {'tabs__item--active': cityName === city})}
+              onClick={() => handleFilter(city)}
+            >
               <span>{city}</span>
             </a>
           </li>

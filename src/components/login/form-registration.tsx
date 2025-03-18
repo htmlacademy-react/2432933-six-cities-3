@@ -1,5 +1,5 @@
-import { useForm } from '../../hooks/use-form/use-form';
 import { FormEvent, ChangeEvent } from 'react';
+import { useForm } from '../../hooks/use-form/use-form';
 
 const FormRegistration = () => {
   const { values, setFieldValue } = useForm({email: '', password: ''});
