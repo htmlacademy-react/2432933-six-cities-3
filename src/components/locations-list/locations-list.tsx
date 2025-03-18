@@ -13,7 +13,7 @@ const LocationsList = ({cityName, handleFilter} :LocationsProps) => (
         {cities.map((city) => (
           <li className="locations__item" key={city}>
             <a
-              className={`locations__item-link tabs__item ${ clsx({'tabs__item--active': cityName === city})}`}
+              className={clsx('locations__item-link tabs__item', {'tabs__item--active': cityName === city})}
               onClick={() => handleFilter(city)}
             >
               <span>{city}</span>

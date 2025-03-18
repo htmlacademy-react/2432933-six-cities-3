@@ -4,13 +4,20 @@ const filtersOffers = (offers: TypePlace[], cityName: string) => offers.filter((
 
 type SortFunction = (offers: TypePlace[]) => TypePlace[];
 
-const sortOffers: Record<string, SortFunction> = {
-  'Popular': (offers) => [...offers],
-  'Price: low to high': (offers) => offers.toSorted((firstOffer, secondOffer) => firstOffer.price - secondOffer.price),
-  'Price: high to low': (offers) => offers.toSorted((firstOffer, secondOffer) => secondOffer.price - firstOffer.price),
-  'Top rated first'   : (offers) => offers.toSorted((firstOffer, secondOffer) => secondOffer.rating - firstOffer.rating),
+enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+const sortOffers: Record<SortType, SortFunction> = {
+  [SortType.Popular]: (offers) => [...offers],
+  [SortType.PriceLowToHigh] : (offers) => [...offers].sort((firstOffer, secondOffer) => firstOffer.price - secondOffer.price),
+  [SortType.PriceHighToLow] : (offers) => [...offers].sort((firstOffer, secondOffer) => secondOffer.price - firstOffer.price),
+  [SortType.TopRatedFirst]  : (offers) => [...offers].sort((firstOffer, secondOffer) => secondOffer.rating - firstOffer.rating),
 };
 
-const sortingOffers = (offers: TypePlace[], key: string) => sortOffers[key](offers);
+const sortingOffers = (offers: TypePlace[], key: SortType) => sortOffers[key](offers);
 
 export {filtersOffers, sortingOffers};

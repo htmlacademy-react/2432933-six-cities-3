@@ -28,10 +28,10 @@ const PlacesSorting = () => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${clsx({'places__options--opened':  isOpen})}`}>
+      <ul className= {clsx('places__options places__options--custom', {'places__options--opened': isOpen})}>
         {options.map((option) => (
 
-          <li className={` places__option  ${ clsx({'places__option--active' : selectSort === option }) } `}
+          <li className= {clsx('places__option', {'places__option--active' : selectSort === option })}
             key={option}
             tabIndex={0}
             onClick={() => handleOptionClick(option)}

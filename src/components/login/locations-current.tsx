@@ -13,7 +13,12 @@ const LocationsCurrent = () => {
   return(
     <section className="locations locations--login locations--current">
       <div className="locations__item">
-        <Link className="locations__item-link" to={'/'} onClick={() => handleLinkClick(cityName)}>
+        <Link className="locations__item-link" to={'/'}
+          onClick={(event) => {
+            event.preventDefault();
+            handleLinkClick(cityName);
+          }}
+        >
           <span>{cityName}</span>
         </Link>
       </div>

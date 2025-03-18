@@ -11,7 +11,7 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-const cities :string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam' , 'Hamburg', 'Dusseldorf'];
+const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam' , 'Hamburg', 'Dusseldorf'];
 const CITY_NAME_DEFAULT = 'Paris';
 
 export {AppRoute , AuthorizationStatus, cities, CITY_NAME_DEFAULT};
