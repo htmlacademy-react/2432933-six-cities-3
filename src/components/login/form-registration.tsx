@@ -31,6 +31,7 @@ const FormRegistration = () => {
           onChange={handleChange}
         />
       </div>
+
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">Password</label>
         <input
