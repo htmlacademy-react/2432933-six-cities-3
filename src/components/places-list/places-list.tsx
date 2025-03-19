@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TypePlace } from '../../types/place-type/place-type';
 import PremiumMark from '../premium-mark/premium-mark';
-import PlacesCardImage from '../place-card-image/place-card-image';
 import PlacesCardInfo from '../places-card-info/places-card-info';
 
 type classNames = {
@@ -28,7 +27,7 @@ const PlacesList = ({ places, onActiveCardChange, classNames } :PlacesListProps)
           { place.isPremium && <PremiumMark /> }
 
           <div className={classNames.imageWrapper}>
-            <PlacesCardImage image={place.previewImage}/>
+            <img className="place-card__image" src={ place.previewImage } width='260' height='200' alt="Place image" />
             <div className="place-card__info">
               <PlacesCardInfo {...place} />
             </div>

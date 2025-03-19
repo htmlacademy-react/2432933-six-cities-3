@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useAppDispatch, useAppSelector} from '../../../hooks/use-app-redux/use-app-redux';
 import { setSorting } from '../../../store/offers/offers-reducer';
 
-const options : string [] = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
+const options = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 const PlacesSorting = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

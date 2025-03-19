@@ -1,6 +1,5 @@
 import Logo from './components/logo';
 import Navigation from './components/navigation';
-//import { RequiredPageConfig } from '../../types/page-config/page-config';
 import { useRouteConfig } from '../../hooks/use-route-config/use-route-config';
 
 
