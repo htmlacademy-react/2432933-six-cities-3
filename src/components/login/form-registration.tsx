@@ -1,13 +1,17 @@
 import { FormEvent, ChangeEvent } from 'react';
 import { useForm } from '../../hooks/use-form/use-form';
+import { loginAction } from '../../services/api-actions';
+import { useAppDispatch } from '../../hooks/use-app-redux/use-app-redux';
+
 
 const FormRegistration = () => {
   const { values, setFieldValue } = useForm({email: '', password: ''});
 
+  const dispatch = useAppDispatch();
+
   const handlesSubmit = (event: FormEvent) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(values);
+    dispatch(loginAction(values));
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
