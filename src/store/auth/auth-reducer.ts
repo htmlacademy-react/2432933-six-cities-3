@@ -28,7 +28,7 @@ const authReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuthAction.rejected, (state) => {
+      .addCase(checkAuthAction.rejected, (state,) => {
         state.authStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(checkAuthAction.fulfilled, (state, action) => {

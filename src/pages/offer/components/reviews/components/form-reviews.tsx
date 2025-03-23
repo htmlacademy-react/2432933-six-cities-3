@@ -1,9 +1,9 @@
 import { FormEvent, } from 'react';
 import IconStar from './icon-star';
-import { useForm } from '../../../../../hooks/use-form/use-form';
+import { useInputValues } from '../../../../../hooks/use-form/use-form';
 
 const FormReviews = () => {
-  const { values, setFieldValue } = useForm({review: '', rating: 0});
+  const { values, setFieldValue } = useInputValues({review: '', rating: 0});
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
