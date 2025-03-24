@@ -1,15 +1,13 @@
 import { TypePlace } from '../types/place-type/place-type';
 import { createSlice, } from '@reduxjs/toolkit';
-import { getFavoriteAction } from '../services/api-actions';
+import { getFavoriteAction, } from '../services/api-actions';
 
 type InitialState = {
   favorites: TypePlace[];
-  favoritesCount: number;
 }
 
 const initialState: InitialState = {
   favorites: [],
-  favoritesCount: 0,
 };
 
 const favoritesReducer = createSlice({
@@ -23,7 +21,6 @@ const favoritesReducer = createSlice({
       })
       .addCase(getFavoriteAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
-        state.favoritesCount = action.payload.length;
       });
   }
 });

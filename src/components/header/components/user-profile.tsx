@@ -4,9 +4,10 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/use-app-redux/use
 import { MouseEvent } from 'react';
 
 
-const SignOut = () => {
+const UserProfile = () => {
   const dispatch = useAppDispatch();
   const userProfile = useAppSelector((state) => state.authStatus.user);
+  const favorites = useAppSelector((state)=> state.favorites.favorites);
 
 
   const handleLogoutClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -21,7 +22,7 @@ const SignOut = () => {
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__user-name user__name">{userProfile?.email}</span>
-          <span className="header__favorite-count">{3}</span>
+          <span className="header__favorite-count">{favorites.length}</span>
         </Link>
       </li>
 
@@ -34,4 +35,4 @@ const SignOut = () => {
   );
 };
 
-export default SignOut;
+export default UserProfile;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { TypePlace } from '../../types/place-type/place-type';
 import PremiumMark from '../premium-mark/premium-mark';
 import PlacesCardInfo from '../places-card-info/places-card-info';

@@ -1,7 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../hooks/use-app-redux/use-app-redux';
-import { loadOffers } from '../store/offers/offers-reducer';
 import { TypePlace } from '../types/place-type/place-type';
+import { Offer } from '../types/offer-type/offer-type';
+import { Comment } from '../types/offer-type/comment-type';
 import { AxiosInstance } from 'axios';
 import { setLoadStatusOffers } from '../store/offers/offers-reducer';
 import { saveToken, dropToken} from './token';
@@ -11,6 +12,10 @@ const routeList = {
   LOGIN: '/login',
   LOG_OUT: '/logout',
   FAVORITES: '/favorite',
+  OFFER: (offerId :string) => `/offers/${offerId}`,
+  OFFERS_NEARBY: (offerId :string) => `/offers/${offerId}/nearby`,
+  COMMENTS: (offerId :string) => `/comments/${offerId}`,
+  FAVORITE_STATUS: (offerId :string, isFavorite: boolean) => `/favorite/${offerId}/${isFavorite ? 1 : 0}`,
 };
 
 type ThunkApiConfig = {
@@ -33,13 +38,13 @@ type User = {
   isPro: boolean;
 } // уберу в отдельный types. пока для удобства
 
-const fetchOffers = createAsyncThunk<void, undefined, ThunkApiConfig >(
+const fetchOffers = createAsyncThunk<TypePlace[], undefined, ThunkApiConfig >(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setLoadStatusOffers(true));
     const {data} = await api.get<TypePlace[]>(routeList.OFFERS);
     dispatch(setLoadStatusOffers(false));
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
@@ -54,10 +59,7 @@ const getFavoriteAction = createAsyncThunk<TypePlace[], undefined, ThunkApiConfi
 const checkAuthAction = createAsyncThunk<User, undefined, ThunkApiConfig>(
   'user/checkAuth',
   async (_arg, {dispatch ,extra: api}) => {
-    const {data} = await api.get<User>(routeList.LOGIN); /*тут при check, если пользователь не овтаризован то в консоли 401
-                                                    GET https://15.design.htmlacademy.pro/six-cities/login 401 (Unauthorized)
-                                                    try catch убрал пока не применяю
-    */
+    const {data} = await api.get<User>(routeList.LOGIN);
     dispatch(getFavoriteAction());
     return data;
   },
@@ -82,5 +84,43 @@ const logoutAction = createAsyncThunk<void, undefined, ThunkApiConfig>(
   },
 );
 
+const getOffer = createAsyncThunk<Offer, string, ThunkApiConfig>(
+  'user/getOffer',
+  async (offerId, { extra: api}) => {
+    const {data} = await api.get<Offer>(routeList.OFFER(offerId));
+    return data ;
+  }
+);
 
-export {fetchOffers, checkAuthAction, loginAction, logoutAction, getFavoriteAction};
+const getOffersNearby = createAsyncThunk<TypePlace[], string, ThunkApiConfig>(
+  'user/getOffersNearby',
+  async (offerId, { extra: api}) => {
+    const {data} = await api.get<TypePlace[]>(routeList.OFFERS_NEARBY(offerId));
+    return data ;
+  }
+);
+
+const getOfferComments = createAsyncThunk<Comment[], string, ThunkApiConfig>(
+  'user/getOfferComments',
+  async (offerId, { extra: api}) => {
+    const {data} = await api.get<Comment[]>(routeList.COMMENTS(offerId));
+    return data ;
+  }
+);
+
+type OfferComments = {
+  offerId: string;
+  isFavorite: boolean;
+}
+
+
+const fetchFavoriteStatus = createAsyncThunk<TypePlace, OfferComments, ThunkApiConfig>(
+  'user/getOfferComments',
+  async ({offerId, isFavorite}, {dispatch, extra: api}) => {
+    const {data} = await api.post<TypePlace>(routeList.FAVORITE_STATUS(offerId, isFavorite));
+    dispatch(getFavoriteAction());
+    return data ;
+  }
+);
+
+export {fetchOffers, checkAuthAction, loginAction, logoutAction, getFavoriteAction, getOffer, getOffersNearby, getOfferComments, fetchFavoriteStatus};
