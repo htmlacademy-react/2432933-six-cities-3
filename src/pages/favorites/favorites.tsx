@@ -1,9 +1,9 @@
 import SectionFavorites from './components/section-favorites';
 import SectionFavoritesEmpty from './components/section-favorites-empty';
-import { MockOffers } from '../../mocks/offers/mockOffers';
+import { useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
 
 const Favorites = () => {
-  const favoritePlaces = MockOffers.filter((offer) => offer.isFavorite);
+  const favoritePlaces = useAppSelector((state) => state.favorites.favorites);
 
   return (
     <main className="page__main page__main--favorites">

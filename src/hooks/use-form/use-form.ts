@@ -1,6 +1,6 @@
 import { useState, } from 'react';
 
-const useForm = <T extends Record<string, string | number>>(initialValues: T) => {
+const useInputValues = <T extends Record<string, string | number>>(initialValues: T) => {
   const [values, setValues] = useState<T>(initialValues);
 
   const setFieldValue = (name: keyof T, value: T[keyof T]) => {
@@ -13,5 +13,5 @@ const useForm = <T extends Record<string, string | number>>(initialValues: T) =>
   return { values, setFieldValue };
 };
 
-export {useForm};
+export {useInputValues};
 

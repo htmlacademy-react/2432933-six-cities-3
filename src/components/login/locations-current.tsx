@@ -6,9 +6,7 @@ import { cities } from '../const';
 
 const LocationsCurrent = () => {
   const cityName = cities[Math.floor(Math.random() * cities.length)];
-
   const dispatch = useAppDispatch();
-  const handleLinkClick = (city: string) => dispatch(setCity(city));
 
   return(
     <section className="locations locations--login locations--current">
@@ -16,7 +14,7 @@ const LocationsCurrent = () => {
         <Link className="locations__item-link" to={'/'}
           onClick={(event) => {
             event.preventDefault();
-            handleLinkClick(cityName);
+            dispatch(setCity(cityName));
           }}
         >
           <span>{cityName}</span>
