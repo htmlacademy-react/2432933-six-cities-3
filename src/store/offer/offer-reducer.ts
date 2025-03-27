@@ -55,12 +55,11 @@ const offerReducer = createSlice({
         state.error = null;
         state.userComment = action.payload;
       })
-
-    /* .addCase(fetchFavoriteStatus.fulfilled, (state, action) => {
+      .addCase(fetchFavoriteStatus.fulfilled, (state, action) => {
         if(state.offer){
           state.offer.isFavorite = action.payload.isFavorite;
         }
-      }); */
+      });
 
   }
 });
