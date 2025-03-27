@@ -1,6 +1,6 @@
 import { createSlice, } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../components/const';
-import { checkAuthAction, loginAction, logoutAction} from '../../services/api-actions';
+import { checkAuthAction, loginAction, logoutAction } from '../../services/api-action/user-process';
 
 type User = {
   id: string;

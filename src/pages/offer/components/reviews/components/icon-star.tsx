@@ -1,5 +1,5 @@
-import React, {ChangeEvent} from 'react';
-
+import { Fragment } from 'react';
+import { useFormContext } from 'react-hook-form';
 type Stars = {
   estimation: number;
   title: string;
@@ -12,30 +12,25 @@ const stars :Stars[] = [
   { estimation: 1, title: 'terribly' },
 ];
 
-type IconStarProps = {
-  onRatingChange: (rating: number) => void;
-}
 
-const IconStar = ({onRatingChange} :IconStarProps) => {
-  const handleRatingChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const rating = Number(event.target.value);
-    onRatingChange(rating);
-  };
+const IconStar = () => {
+  const { register } = useFormContext();
 
   return (
     <>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating ">
         {stars.map(({estimation = 0, title}) => (
-          <React.Fragment key={estimation}>
+          <Fragment key={estimation}>
             <input
               className="form__rating-input visually-hidden"
-              name="rating"
               value={estimation}
               id={`${estimation}-stars`}
               type="radio"
               aria-label={`${estimation} stars`}
-              onChange={handleRatingChange}
+              {...register('rating', {
+                required: true,
+              })}
             />
             <label
               htmlFor={`${estimation}-stars`}
@@ -46,7 +41,7 @@ const IconStar = ({onRatingChange} :IconStarProps) => {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
 

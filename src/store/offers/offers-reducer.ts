@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypePlace } from '../../types/place-type/place-type';
-import { fetchFavoriteStatus, fetchOffers } from '../../services/api-actions';
+import { fetchFavoriteStatus,} from '../../services/api-action/favorite-action';
+import { getOffers } from '../../services/api-action/offers';
 
 const CITY_NAME_DEFAULT = 'Paris';
 
@@ -8,14 +9,16 @@ type InitialState = {
   city: string;
   sorting: string;
   list: TypePlace[];
-  loadStatus: boolean;
+  isLoading : boolean;
+  error: string | null;
 }
 
 const initialState: InitialState = {
   city: CITY_NAME_DEFAULT,
   sorting: 'Popular',
   list: [],
-  loadStatus: false,
+  isLoading : false,
+  error: null,
 };
 
 const offersReducer = createSlice({
@@ -28,26 +31,32 @@ const offersReducer = createSlice({
     setSorting(state, action: PayloadAction<string>) {
       state.sorting = action.payload;
     },
-    setLoadStatusOffers(state, action: PayloadAction<boolean>) {
-      state.loadStatus = action.payload;
-    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavoriteStatus.fulfilled, (state, action) => {
         const updatedOffer = action.payload;
-        state.list = state.list.map((offer) => offer.id === updatedOffer.id ? updatedOffer : offer);
+        const index = state.list.findIndex((offer) => offer.id === updatedOffer.id);
+        if (index !== -1) {
+          state.list[index] = updatedOffer;
+        }
       })
-      .addCase(fetchOffers.rejected, (state) => {
-        state.list = [];
+      .addCase(getOffers.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(fetchOffers.fulfilled, (state, action) => {
+      .addCase(getOffers.rejected, (state) => {
+        state.error = 'Ошибка при загрузке данных';
+        state.isLoading = false;
+      })
+      .addCase(getOffers.fulfilled, (state, action) => {
+        state.error = null;
+        state.isLoading = false;
         state.list = action.payload;
       });
   }
 });
 
-export const { setCity, setSorting, setLoadStatusOffers } = offersReducer.actions;
+export const { setCity, setSorting, } = offersReducer.actions;
 export default offersReducer.reducer;
 
 

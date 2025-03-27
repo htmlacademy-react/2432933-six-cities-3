@@ -1,8 +1,6 @@
-import { FormEvent, ChangeEvent, } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useInputValues } from '../../hooks/use-form/use-form';
-import { loginAction } from '../../services/api-actions';
+import { loginAction } from '../../services/api-action/user-process';
 import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
 import { AppRoute } from '../const';
 import ErrorMessage from '../error-message';
@@ -22,41 +20,29 @@ const errorMessage = {
 
 
 const FormRegistration = () => {
-  const { register, setError, clearErrors, formState: { errors, isValid } } = useForm<FormValid>({mode: 'onBlur', });
+  const { register, setError, clearErrors, handleSubmit, formState: { errors, isValid } } = useForm<FormValid>({mode: 'onBlur', });
 
-  const { values, setFieldValue } = useInputValues({email: '', password: ''});
+  const showError = () => {
+    setError('root.serverError', {
+      type: 'manual',
+      message: errorMessage.server,
+    });
+    setTimeout(() => clearErrors('root.serverError'), 3000);
+  };
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
+  const onSubmit = (data: FormValid) => {
 
-    const result = await dispatch(loginAction(values));
-    if(!loginAction.fulfilled.match(result)){
-      setError('root.serverError', {
-        type: 'manual',
-        message: errorMessage.server,
-      });
-
-      setTimeout(() => {
-        clearErrors('root.serverError');
-      }, 3000);
-
-      return;
-    }
-    navigate(AppRoute.Main);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === 'email' || name === 'password') {
-      setFieldValue(name, value);
-    }
+    dispatch(loginAction(data))
+      .unwrap()
+      .then(() => navigate(AppRoute.Main))
+      .catch(() => showError());
   };
 
   return (
-    <form className="login__form form" action="#" method="post" onSubmit={(e) => void handleSubmit(e)} > {/* костыль ?  */}
+    <form className="login__form form" action="#" method="post" onSubmit={(event) => void handleSubmit(onSubmit)(event)} >
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
         <input
@@ -70,7 +56,6 @@ const FormRegistration = () => {
               message: errorMessage.email
             },
           }) }
-          onChange={handleChange}
         />
         <ErrorMessage message={errors.email?.message} />
       </div>
@@ -92,7 +77,6 @@ const FormRegistration = () => {
               message: errorMessage.minLength
             }
           })}
-          onChange={handleChange}
         />
         <ErrorMessage message={errors.password?.message} />
       </div>

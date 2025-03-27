@@ -1,22 +1,27 @@
 import clsx from 'clsx';
 import { useAppDispatch, } from '../../../../hooks/use-app-redux/use-app-redux';
-import { fetchFavoriteStatus, } from '../../../../services/api-actions';
+import { fetchFavoriteStatus} from '../../../../services/api-action/favorite-action';
+import { useCallback } from 'react';
 
 type ButtonFavoriteProps = {
   isFavorite :boolean;
   id: string;
+  className: string;
 }
 
-const ButtonFavorite = ({isFavorite, id}:ButtonFavoriteProps) => {
+const ButtonFavorite = ({isFavorite, id, className}:ButtonFavoriteProps) => {
   const dispatch = useAppDispatch();
 
-  const handleFavoriteClick = () => {
+  const buttonBaseClass = `${className}__bookmark-button button`;
+  const buttonActiveClass = `${className}__bookmark-button--active`;
+
+  const handleFavoriteClick = useCallback(() => {
     dispatch(fetchFavoriteStatus({offerId: id, isFavorite: !isFavorite}));
-  };
+  }, [dispatch, id, isFavorite]);
 
   return (
     <button
-      className={clsx('place-card__bookmark-button button', {'place-card__bookmark-button--active' : isFavorite})}
+      className={clsx(buttonBaseClass, { [buttonActiveClass] : isFavorite})}
       type="button"
       onClick={(evt) => {
         evt.preventDefault();

@@ -6,6 +6,7 @@ type State = ReturnType<typeof store.getState>;
 const selectOffers = (state: State) => state.offers.list;
 const selectCity = (state: State) => state.offers.city;
 const selectSort = (state: State) => state.offers.sorting;
+const selectName = (state: State) => state.offers.city;
 
 const offersSelector = createSelector(
   [selectOffers, selectCity, selectSort],
@@ -15,4 +16,5 @@ const offersSelector = createSelector(
   }
 );
 
-export { offersSelector, };
+
+export { offersSelector, selectName};

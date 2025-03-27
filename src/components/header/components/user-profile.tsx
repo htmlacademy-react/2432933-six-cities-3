@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../../services/api-actions';
+import { logoutAction } from '../../../services/api-action/user-process';
 import { useAppDispatch, useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
 import { MouseEvent } from 'react';
 
