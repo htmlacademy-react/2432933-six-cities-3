@@ -9,7 +9,7 @@ const PlacesCardInfo = (place: CardInfoProps) => (
   <>
     <div className="place-card__price-wrapper">
       <PriceCard price={place.price} />
-      <ButtonFavorite isFavorite={place.isFavorite} id={place.id}/>
+      <ButtonFavorite isFavorite={place.isFavorite} id={place.id} className={'place-card'}/>
     </div>
     <RatingCard placeRating={place.rating} />
     <h2 className="place-card__name">

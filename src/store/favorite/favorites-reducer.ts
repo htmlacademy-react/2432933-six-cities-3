@@ -1,6 +1,6 @@
-import { TypePlace } from '../types/place-type/place-type';
+import { TypePlace } from '../../types/place-type/place-type';
 import { createSlice, } from '@reduxjs/toolkit';
-import { getFavoriteAction, } from '../services/api-actions';
+import { getFavoriteAction, } from '../../services/api-action/favorite-action';
 
 type InitialState = {
   favorites: TypePlace[];

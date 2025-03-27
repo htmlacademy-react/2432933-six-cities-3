@@ -11,7 +11,7 @@ import Reviews from './components/reviews/reviews';
 import PlacesList from '../../components/places-list/places-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
-import { getOffer, getOfferComments, getOffersNearby } from '../../services/api-actions';
+import { getOffer, getOfferComments, getOffersNearby } from '../../services/api-action/offer';
 
 const MAX_PLACES = 3;
 
@@ -40,7 +40,7 @@ const Offer = () => {
 
   if(!offer || firstFewOffers.length === 0){
     return;
-  } //firstFewOffers.length === 0  лучше Loader?  добавить  сначала приходит [] из-за это ошибка в CitiesMap.
+  }
 
   return(
     <main className="page__main page__main--offer">
@@ -49,7 +49,7 @@ const Offer = () => {
         <div className="offer__container container">
           <div className="offer__wrapper">
             {offer.isPremium && <Premium />}
-            <Name title={offer.title} isFavorite={offer.isFavorite} />
+            <Name title={offer.title} isFavorite={offer.isFavorite} id={id || ''}/>
             <Rating rating={offer.rating} />
             <Features
               bedrooms={offer.bedrooms}
