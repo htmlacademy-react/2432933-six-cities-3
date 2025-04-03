@@ -6,8 +6,7 @@ import { setCity } from '../../store/offers/offers-reducer';
 import { offersSelector, selectName} from '../../store/offers/offers-selector';
 import PreLoading from '../pre-loading/pre-loading';
 import ErrorMessage from '../../components/error-message';
-import { useCallback } from 'react';
-
+import { useCallback, } from 'react';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();

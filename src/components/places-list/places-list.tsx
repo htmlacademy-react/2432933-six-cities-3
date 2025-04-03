@@ -10,7 +10,7 @@ type classNames = {
 
 type PlacesListProps = {
   places: TypePlace[];
-  onActiveCardChange: (id: string | null) => void;
+  onActiveCardChange?: (id: string | null) => void;
   classNames: classNames;
 };
 
@@ -20,8 +20,8 @@ const PlacesList = ({ places, onActiveCardChange, classNames } :PlacesListProps)
       <article
         key={ place.id }
         className="cities__card place-card"
-        onMouseEnter = {() => onActiveCardChange(place.id)}
-        onMouseLeave = {() => onActiveCardChange(null)}
+        onMouseEnter = {() => onActiveCardChange?.(place.id)}
+        onMouseLeave = {() => onActiveCardChange?.(null)}
       >
         <Link to={`/offer/${place.id}`} >
           { place.isPremium && <PremiumMark /> }
@@ -37,5 +37,4 @@ const PlacesList = ({ places, onActiveCardChange, classNames } :PlacesListProps)
     ))}
   </div>
 );
-
 export default PlacesList;

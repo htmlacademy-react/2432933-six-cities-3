@@ -1,15 +1,27 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from '../layout/layout';
 import MainPage from '../../pages/main-page/main-page';
 import MainLogin from '../../pages/main-login/main-login';
 import NoMainPage from '../../pages/no-main-page/no-main-page';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
-import Offer from '../../pages/offer/offer';
-import { AppRoute, AuthorizationStatus } from '../const';
+import Offer from '../../pages/offer/offer-page';
+import { AppRoute, } from '../const';
+import { checkAuthAction } from '../../services/api-action/user-process';
+import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
+import { useEffect } from 'react';
+import { getOffers } from '../../services/api-action/offers';
 
-const App = () => (
-  <BrowserRouter>
+const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getOffers());
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+
+
+  return(
     <Routes>
       <Route path={ AppRoute.Main } element={ <Layout /> }>
         <Route index element={ <MainPage /> } />
@@ -17,7 +29,7 @@ const App = () => (
         <Route
           path={ AppRoute.Favorites }
           element={
-            <PrivateRoute authorizationStatus={ AuthorizationStatus.NoAuth }>
+            <PrivateRoute >
               <Favorites />
             </PrivateRoute>
           }
@@ -26,7 +38,7 @@ const App = () => (
       </Route>
       <Route path="*" element={ <NoMainPage/> }/>
     </Routes>
-  </BrowserRouter>
-);
+  );
+};
 
 export default App;

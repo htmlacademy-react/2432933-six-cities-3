@@ -6,23 +6,38 @@ import { routeList } from './route-list';
 import { Comment } from '../../types/offer-type/comment-type';
 
 const getOffer = createAsyncThunk<Offer, string, ThunkApiConfig>(
-  'user/getOffer',
-  async (offerId, { extra: api}) => {
-    const {data} = await api.get<Offer>(routeList.OFFER(offerId));
-    return data ;
+  'data/getOffer',
+  async (offerId, { extra: api, rejectWithValue }) => {
+    try {
+      const {data} = await api.get<Offer>(routeList.OFFER(offerId));
+      return data ;
+    } catch (error) {
+
+      return rejectWithValue({
+        message: 'Ошибка при загрузке данных Offer!',
+      });
+    }
   }
 );
 
 const getOffersNearby = createAsyncThunk<TypePlace[], string, ThunkApiConfig>(
-  'user/getOffersNearby',
-  async (offerId, { extra: api}) => {
-    const {data} = await api.get<TypePlace[]>(routeList.OFFERS_NEARBY(offerId));
-    return data ;
+  'data/getOffersNearby',
+  async (offerId, { extra: api, rejectWithValue }) => {
+    try{
+      const {data} = await api.get<TypePlace[]>(routeList.OFFERS_NEARBY(offerId));
+      return data ;
+    }catch (error) {
+
+      return rejectWithValue({
+        message: 'Не удалось загрузить предложения неподолеку!',
+      });
+    }
+
   }
 );
 
 const getOfferComments = createAsyncThunk<Comment[], string, ThunkApiConfig>(
-  'user/getOfferComments',
+  'data/getOfferComments',
   async (offerId, { extra: api}) => {
     const {data} = await api.get<Comment[]>(routeList.COMMENTS(offerId));
     return data ;
@@ -36,7 +51,7 @@ type UserComment = {
 
 
 const addOfferComments = createAsyncThunk<Comment, { offerId: string; commentData: UserComment }, ThunkApiConfig>(
-  'user/addOfferComments',
+  'data/addOfferComments',
   async ({offerId, commentData}, {dispatch, extra: api}) => {
     const { data } = await api.post<Comment>(routeList.USER_COMMENTS(offerId), commentData);
     dispatch(getOfferComments(offerId));

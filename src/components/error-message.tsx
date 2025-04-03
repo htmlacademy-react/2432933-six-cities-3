@@ -1,6 +1,6 @@
 
 type ErrorMessageProps = {
-  message?: string;
+  message?: string | null;
   className?: string;
 };
 

@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import IconStar from './icon-star';
-import { useAppDispatch } from '../../../../../hooks/use-app-redux/use-app-redux';
-import { addOfferComments } from '../../../../../services/api-action/offer';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/use-app-redux/use-app-redux';
+import { addOfferComments } from '../../../../../services/api-action/offer-action';
 import ErrorMessage from '../../../../../components/error-message';
 
 type FormValid = {
@@ -17,6 +17,7 @@ const errorMessage = {
 
 
 const FormReviews = () => {
+  const errorStatus = useAppSelector((state) => state.offer.errorStatus);
   const form = useForm<FormValid>();
   const { errors, isValid } = form.formState;
   const dispatch = useAppDispatch();
@@ -75,6 +76,7 @@ const FormReviews = () => {
           >
           Submit
           </button>
+          {errorStatus && <ErrorMessage message={'Error pi'} />}
         </div>
       </form>
     </FormProvider>
