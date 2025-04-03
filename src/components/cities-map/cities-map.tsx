@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo} from 'react';
+import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map/use-map';
 import { TypePlace, Location } from '../../types/place-type/place-type';
 import { Marker, layerGroup } from 'leaflet';
