@@ -17,6 +17,10 @@ const useMap = (mapRef :MapRefProps, location :Location) => {
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
+    if (!location) {
+      return;
+    }
+
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapRef.current, {
         center: [location.latitude, location.longitude],

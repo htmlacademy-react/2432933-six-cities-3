@@ -1,15 +1,14 @@
 import SignIn from './sign-in';
 import UserProfile from './user-profile';
 import { useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
-import { AuthorizationStatus } from '../../const';
 
 const Navigation = () => {
-  const authStatus = useAppSelector((state) => state.authStatus.authStatus);
+  const isAuth = useAppSelector((state) => state.authStatus.isAuth);
 
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
-        { authStatus === AuthorizationStatus.Auth ? <UserProfile /> : <SignIn /> }
+        { isAuth ? <UserProfile /> : <SignIn /> }
       </ul>
     </nav>
   );
