@@ -16,7 +16,7 @@ type FavoriteStatus = {
   isFavorite: boolean;
 }
 
-const fetchFavoriteStatus = createAsyncThunk<TypePlace, FavoriteStatus, ThunkApiConfig>(
+const updateFavoriteStatus = createAsyncThunk<TypePlace, FavoriteStatus, ThunkApiConfig>(
   'user/fetchFavoriteStatus',
   async ({offerId, isFavorite}, {dispatch, extra: api}) => {
     const {data} = await api.post<TypePlace>(routeList.FAVORITE_STATUS(offerId, isFavorite));
@@ -25,5 +25,5 @@ const fetchFavoriteStatus = createAsyncThunk<TypePlace, FavoriteStatus, ThunkApi
   }
 );
 
-export {getFavoriteAction, fetchFavoriteStatus};
+export {getFavoriteAction, updateFavoriteStatus};
 

@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react';
 import PlacesList from '../../../components/places-list/places-list';
 import PlacesSorting from '../places-sorting/places-sorting';
 import CitiesMap from '../../../components/cities-map/cities-map';
@@ -9,13 +8,8 @@ import EmptyPlacesList from './empty-places-list';
 const CitiesPlaces = () => {
   const places = useAppSelector(offersSelector);
   const cityName = useAppSelector((state) => state.offers.city);
-  const [activeCard, setActiveCard] = useState<string | null>(null);
 
-  const handleActiveCardChange = useCallback((id: string | null) => {
-    setActiveCard(id);
-  }, []);
-
-  if(places.length === 0){
+  if(!places.length){
     return <EmptyPlacesList />;
   }
 
@@ -28,7 +22,6 @@ const CitiesPlaces = () => {
         <PlacesSorting />
         <PlacesList
           places={places}
-          onActiveCardChange={handleActiveCardChange}
           classNames={{
             container: 'cities__places-list places__list tabs__content',
             imageWrapper: 'cities__image-wrapper place-card__image-wrapper'
@@ -36,7 +29,7 @@ const CitiesPlaces = () => {
         />
       </section>
       <div className="cities__right-section">
-        <CitiesMap offers={places} currentId={activeCard} className={'cities__map map'}/>
+        <CitiesMap offers={places} className={'cities__map map'}/>
       </div>
     </div>
   );

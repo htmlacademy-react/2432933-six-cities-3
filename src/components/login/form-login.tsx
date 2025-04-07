@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { loginAction } from '../../services/api-action/user-process';
 import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
 import { AppRoute } from '../const';
-import ErrorMessage from '../error-message';
+import ErrorMessage from '../error-message/error-message';
 
 type FormValid = {
   password: string;
@@ -19,7 +19,7 @@ const errorMessage = {
 };
 
 
-const FormRegistration = () => {
+const FormLogin = () => {
   const { register, setError, clearErrors, handleSubmit, formState: { errors, isValid } } = useForm<FormValid>({mode: 'onBlur', });
 
   const showError = () => {
@@ -86,4 +86,4 @@ const FormRegistration = () => {
   );
 };
 
-export default FormRegistration;
+export default FormLogin;

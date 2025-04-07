@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './use-app-redux/use-app-redux';
 import { AppRoute } from '../components/const';
-import { fetchFavoriteStatus } from '../services/api-action/favorite-action';
+import { updateFavoriteStatus } from '../services/api-action/favorite-action';
 
 
 const useFavorite = (id: string, isFavorite: boolean) => {
@@ -15,7 +15,7 @@ const useFavorite = (id: string, isFavorite: boolean) => {
       return;
     }
 
-    dispatch(fetchFavoriteStatus({offerId: id, isFavorite: !isFavorite}));
+    dispatch(updateFavoriteStatus({offerId: id, isFavorite: !isFavorite}));
   };
 
   return handleFavoriteClick;

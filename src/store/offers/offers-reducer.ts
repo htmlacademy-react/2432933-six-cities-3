@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypePlace } from '../../types/place-type/place-type';
-import { fetchFavoriteStatus,} from '../../services/api-action/favorite-action';
+import { updateFavoriteStatus,} from '../../services/api-action/favorite-action';
 import { getOffers } from '../../services/api-action/offers';
 
 const CITY_NAME_DEFAULT = 'Paris';
@@ -11,6 +11,7 @@ type InitialState = {
   list: TypePlace[];
   isLoading : boolean;
   error: string | null;
+  //activeCard: string | null;
 }
 
 const initialState: InitialState = {
@@ -19,6 +20,7 @@ const initialState: InitialState = {
   list: [],
   isLoading : false,
   error: null,
+ //activeCard: null,
 };
 
 const offersReducer = createSlice({
@@ -31,10 +33,13 @@ const offersReducer = createSlice({
     setSorting(state, action: PayloadAction<string>) {
       state.sorting = action.payload;
     },
+   /*  setActiveCard(state, action: PayloadAction<string | null>) {
+      state.activeCard = action.payload;
+    } */
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFavoriteStatus.fulfilled, (state, action) => {
+      .addCase(updateFavoriteStatus.fulfilled, (state, action) => {
         const updatedOffer = action.payload;
         const index = state.list.findIndex((offer) => offer.id === updatedOffer.id);
         if (index !== -1) {

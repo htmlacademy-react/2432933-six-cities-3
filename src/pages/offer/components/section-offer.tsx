@@ -25,16 +25,16 @@ const SectionOffer = () => {
           <FavoriteTitle />
           <Rating />
           <Features />
-          <div className="offer__price">
+          {/* <div className="offer__price">
             <b className="offer__price-value">&euro;{price}</b>
             <span className="offer__price-text">&nbsp;night</span>
-          </div>
+          </div> */}
           <Inside />
-          <PropertyHost />
+        {/*   <PropertyHost /> */}
           <Reviews />
         </div>
       </div>
-      <CitiesMap offers={firstFewOffers} className={'offer__map map'} currentMarker={location}/>
+      {/* <CitiesMap offers={firstFewOffers} className={'offer__map map'} currentMarker={location}/> */}
     </section>
   );
 };

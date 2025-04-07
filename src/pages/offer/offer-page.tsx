@@ -5,38 +5,36 @@ import { useAppDispatch, useAppSelector } from '../../hooks/use-app-redux/use-ap
 import { getOffer, getOffersNearby } from '../../services/api-action/offer-action';
 import { selectFirstFewOffers } from '../../store/offer/offer-selector';
 import PreLoading from '../pre-loading/pre-loading';
-import ErrorMessage from '../../components/error-message';
 import PlacesList from '../../components/places-list/places-list';
-
+import { useCustomToast } from '../../hooks/use-custom-toast';
 
 const Offer = () => {
   const dispatch = useAppDispatch();
-  const errorMessage = useAppSelector((state) => state.offer.error);
   const firstFewOffers = useAppSelector(selectFirstFewOffers);
   const isLoading = useAppSelector((state) => state.offer.isLoading);
-
   const { id } = useParams();
+  const { Toast, showToast } = useCustomToast();
+
   useEffect(() => {
     if(!id){
       return;
     }
-    dispatch(getOffer(id));
-    dispatch(getOffersNearby(id));
-  }, [dispatch, id]);
 
+    dispatch(getOffer(id)).unwrap().catch(showToast);
+    dispatch(getOffersNearby(id)).unwrap().catch(showToast);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, id]);
 
   if(isLoading){
     return <PreLoading />;
   }
 
-  if(errorMessage) {
-    return <ErrorMessage message={errorMessage?.message} />;
-  }
 
   return(
     <main className="page__main page__main--offer">
       <SectionOffer />
-
+      <Toast />
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighborhood</h2>
