@@ -11,7 +11,6 @@ type InitialState = {
   list: TypePlace[];
   isLoading : boolean;
   error: string | null;
-  //activeCard: string | null;
 }
 
 const initialState: InitialState = {
@@ -20,7 +19,6 @@ const initialState: InitialState = {
   list: [],
   isLoading : false,
   error: null,
- //activeCard: null,
 };
 
 const offersReducer = createSlice({
@@ -33,9 +31,6 @@ const offersReducer = createSlice({
     setSorting(state, action: PayloadAction<string>) {
       state.sorting = action.payload;
     },
-   /*  setActiveCard(state, action: PayloadAction<string | null>) {
-      state.activeCard = action.payload;
-    } */
   },
   extraReducers: (builder) => {
     builder
