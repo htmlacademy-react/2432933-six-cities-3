@@ -4,8 +4,7 @@ import IconStar from './icon-star';
 import { useAppDispatch, } from '../../../../../hooks/use-app-redux/use-app-redux';
 import { addOfferComments } from '../../../../../services/api-action/offer-action';
 import ErrorMessage from '../../../../../components/error-message/error-message';
-import { ApiError } from '../../../../../services/api-action/api-config';
-import toast, { Toaster } from 'react-hot-toast';
+import { useCustomToast } from '../../../../../hooks/use-custom-toast';
 
 type FormValid = {
   comment: string;
@@ -17,13 +16,13 @@ const errorMessage = {
   MAX_LENGTH: 'Длина комментария должна быть не больше 300'
 };
 
-const handleError = (error: ApiError) => toast.error(error.message);
 
 const FormReviews = () => {
   const form = useForm<FormValid>();
   const { errors, isValid } = form.formState;
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const { Toast, showToast } = useCustomToast();
 
   const onSubmit = (data: FormValid) => {
     if(!id){
@@ -36,7 +35,7 @@ const FormReviews = () => {
         comment: data.comment,
         rating: +data.rating
       }
-    })).unwrap().catch(handleError) ;
+    })).unwrap().catch(showToast) ;
     form.reset();
   };
 
@@ -85,7 +84,7 @@ const FormReviews = () => {
           Submit
         </button>
         {/* {errorStatus && <ErrorMessage message={''} />} */}
-        <Toaster />
+        <Toast/>
       </div>
     </form>
   );
