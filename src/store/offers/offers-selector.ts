@@ -7,14 +7,6 @@ const selectOffers = (state: State) => state.offers.list;
 const selectCity = (state: State) => state.offers.city;
 const selectSort = (state: State) => state.offers.sorting;
 const selectName = (state: State) => state.offers.city;
-//const selectActiveCard = (state: State) => state.offers.activeCard;
-
-/* const ActiveCardSelector = createSelector(
-   [selectActiveCard],
-   (activeCard) => {
-    selectActiveCard(id)
-   }
-) */
 
 const offersSelector = createSelector(
   [selectOffers, selectCity, selectSort],

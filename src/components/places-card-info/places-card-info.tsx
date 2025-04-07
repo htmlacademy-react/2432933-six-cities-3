@@ -5,7 +5,7 @@ import ButtonFavorite from './components/button-favorite/button-favorite';
 import { Link, } from 'react-router-dom';
 import PremiumMark from '../premium-mark/premium-mark';
 import { useAppDispatch } from '../../hooks/use-app-redux/use-app-redux';
-import { setActiveCard } from '../../store/test-reducer';
+import { setActiveCard } from '../../store/active-card/card-reducer';
 
 
 const PlacesCardInfo = (place: TypePlace) => {

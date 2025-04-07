@@ -3,7 +3,7 @@ import offersReducer from './offers/offers-reducer';
 import authReducer from './auth/auth-reducer';
 import favoritesReducer from './favorite/favorites-reducer';
 import offerReducer from './offer/offer-reducer';
-import activeCardReducer from './test-reducer';
+import activeCardReducer from './active-card/card-reducer';
 
 
 const rootReducers = combineReducers({
@@ -11,7 +11,7 @@ const rootReducers = combineReducers({
   authStatus: authReducer,
   favorites: favoritesReducer,
   offer: offerReducer,
-  card:activeCardReducer,
+  card: activeCardReducer,
 });
 
 export default rootReducers;
