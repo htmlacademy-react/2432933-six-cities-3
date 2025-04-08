@@ -4,7 +4,7 @@ const MAX_IMAGE = 6;
 const GalleryContainer = () => {
   const images = useAppSelector((state) => state.offer.offer?.images);
 
-  if(!images){
+  if(!images?.length){
     return null;
   }
 

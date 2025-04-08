@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { store } from '../store';
-import {filtersOffers, sortingOffers} from '../../pages/utils';
+import {filtersOffers, sortingOffers, } from '../../pages/utils';
 
 type State = ReturnType<typeof store.getState>;
 const selectOffers = (state: State) => state.offers.list;

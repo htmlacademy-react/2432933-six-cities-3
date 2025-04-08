@@ -1,4 +1,4 @@
-import FormRegistration from '../../components/login/form-registration';
+import FormLogin from '../../components/login/form-login';
 import LocationsCurrent from '../../components/login/locations-current';
 
 const MainLogin = () => (
@@ -6,7 +6,7 @@ const MainLogin = () => (
     <div className="page__login-container container">
       <section className="login">
         <h1 className="login__title">Sign in</h1>
-        <FormRegistration />
+        <FormLogin />
       </section>
       <LocationsCurrent />
     </div>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypePlace } from '../../types/place-type/place-type';
-import { fetchFavoriteStatus,} from '../../services/api-action/favorite-action';
+import { updateFavoriteStatus,} from '../../services/api-action/favorite-action';
 import { getOffers } from '../../services/api-action/offers';
 
 const CITY_NAME_DEFAULT = 'Paris';
@@ -34,7 +34,7 @@ const offersReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFavoriteStatus.fulfilled, (state, action) => {
+      .addCase(updateFavoriteStatus.fulfilled, (state, action) => {
         const updatedOffer = action.payload;
         const index = state.list.findIndex((offer) => offer.id === updatedOffer.id);
         if (index !== -1) {

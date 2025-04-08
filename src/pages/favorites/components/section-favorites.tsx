@@ -1,14 +1,16 @@
 import LocationsCurrent from './locations-currents';
 import LocationsItems from './locations-items';
-import { TypePlace } from '../../../types/place-type/place-type';
 import { groupOffers } from '../../../utils/getGroupedOffers';
+import { useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
+import SectionFavoritesEmpty from './section-favorites-empty';
 
-type SectionFavoritesProps = {
-  favoritePlaces : TypePlace[];
-}
+const SectionFavorites = () => {
+  const favoriteOffers = useAppSelector((state) => state.favorites.favorites);
+  const groupedOffers = Object.entries(groupOffers(favoriteOffers));
 
-const SectionFavorites = ({favoritePlaces} :SectionFavoritesProps) => {
-  const groupedOffers = Object.entries(groupOffers(favoritePlaces));
+  if(!favoriteOffers.length){
+    return <SectionFavoritesEmpty />;
+  }
 
   return(
     <section className="favorites">

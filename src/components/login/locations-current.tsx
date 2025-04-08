@@ -12,10 +12,7 @@ const LocationsCurrent = () => {
     <section className="locations locations--login locations--current">
       <div className="locations__item">
         <Link className="locations__item-link" to={'/'}
-          onClick={(event) => {
-            event.preventDefault();
-            dispatch(setCity(cityName));
-          }}
+          onClick={() => dispatch(setCity(cityName))}
         >
           <span>{cityName}</span>
         </Link>

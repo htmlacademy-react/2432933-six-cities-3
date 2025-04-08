@@ -3,17 +3,17 @@ import useMap from '../../hooks/use-map/use-map';
 import { TypePlace, Location } from '../../types/place-type/place-type';
 import { Marker, layerGroup } from 'leaflet';
 import { defaultCustomIcon, currentCustomIcon, activeCustomIcon } from './const';
+import { useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
 
 type CitiesMapProps = {
   offers: TypePlace[];
-  currentId?: string | null;
   className: string;
   currentMarker?: Location;
 }
 
-const CitiesMap = ({ offers, currentId, className, currentMarker} :CitiesMapProps) => {
+const CitiesMap = ({offers, className, currentMarker} :CitiesMapProps) => {
   const mapRef = useRef(null);
-
+  const currentId = useAppSelector((state) => state.card.activeCard);
   const centerLocation = offers?.[0]?.city.location;
   const citiesMap = useMap(mapRef, centerLocation);
 

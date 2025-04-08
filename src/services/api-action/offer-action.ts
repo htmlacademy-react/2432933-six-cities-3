@@ -4,6 +4,8 @@ import { Offer } from '../../types/offer-type/offer-type';
 import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
 import { Comment } from '../../types/offer-type/comment-type';
+import { AxiosError } from 'axios';
+import { ApiError } from './api-config';
 
 const getOffer = createAsyncThunk<Offer, string, ThunkApiConfig>(
   'data/getOffer',
@@ -11,10 +13,12 @@ const getOffer = createAsyncThunk<Offer, string, ThunkApiConfig>(
     try {
       const {data} = await api.get<Offer>(routeList.OFFER(offerId));
       return data ;
-    } catch (error) {
+    } catch (err) {
+      const error = err as AxiosError<ApiError>;
 
       return rejectWithValue({
         message: 'Ошибка при загрузке данных Offer!',
+        code: error.response?.status
       });
     }
   }
@@ -52,10 +56,17 @@ type UserComment = {
 
 const addOfferComments = createAsyncThunk<Comment, { offerId: string; commentData: UserComment }, ThunkApiConfig>(
   'data/addOfferComments',
-  async ({offerId, commentData}, {dispatch, extra: api}) => {
-    const { data } = await api.post<Comment>(routeList.USER_COMMENTS(offerId), commentData);
-    dispatch(getOfferComments(offerId));
-    return data ;
+  async ({offerId, commentData}, {dispatch, extra: api, rejectWithValue}) => {
+
+    try{
+      const { data } = await api.post<Comment>(routeList.USER_COMMENTS(offerId), commentData);
+      dispatch(getOfferComments(offerId));
+      return data ;
+    }catch (error) {
+      return rejectWithValue({
+        message: 'Не удалось отправить сообщение!',
+      });
+    }
   }
 );
 
