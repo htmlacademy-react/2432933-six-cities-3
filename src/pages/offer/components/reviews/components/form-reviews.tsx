@@ -3,8 +3,6 @@ import { useForm, Controller } from 'react-hook-form';
 import IconStar from './icon-star';
 import { useAppDispatch, } from '../../../../../hooks/use-app-redux/use-app-redux';
 import { addOfferComments } from '../../../../../services/api-action/offer-action';
-import ErrorMessage from '../../../../../components/error-message/error-message';
-import { useCustomToast } from '../../../../../hooks/use-custom-toast';
 
 type FormValid = {
   comment: string;
@@ -19,10 +17,9 @@ const errorMessage = {
 
 const FormReviews = () => {
   const form = useForm<FormValid>();
-  const { errors, isValid } = form.formState;
+  const { /* errors */ isValid } = form.formState;
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { Toast, showToast } = useCustomToast();
 
   const onSubmit = (data: FormValid) => {
     if(!id){
@@ -35,7 +32,7 @@ const FormReviews = () => {
         comment: data.comment,
         rating: +data.rating
       }
-    })).unwrap().catch(showToast) ;
+    })) ;
     form.reset();
   };
 
@@ -71,7 +68,7 @@ const FormReviews = () => {
         })}
       >
       </textarea>
-      <ErrorMessage message={errors.comment?.message} />
+      {/* <ErrorMessage message={errors.comment?.message} /> */}
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -84,7 +81,6 @@ const FormReviews = () => {
           Submit
         </button>
         {/* {errorStatus && <ErrorMessage message={''} />} */}
-        <Toast/>
       </div>
     </form>
   );

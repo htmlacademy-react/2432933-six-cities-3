@@ -4,6 +4,7 @@ import { AppDispatch, State } from '../../hooks/use-app-redux/use-app-redux';
 type ApiError = {
   message: string;
   code?: number;
+  type?: string;
 };
 
 type ThunkApiConfig = {

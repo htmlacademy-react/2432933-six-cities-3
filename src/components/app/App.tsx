@@ -8,43 +8,41 @@ import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer-page';
 import { AppRoute, } from '../const';
 import { checkAuthAction } from '../../services/api-action/user-process';
-import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
+import { useAppDispatch, useAppSelector, } from '../../hooks/use-app-redux/use-app-redux';
 import { useEffect } from 'react';
 import { getOffers } from '../../services/api-action/offers';
-import { useCustomToast } from '../../hooks/use-custom-toast';
-
+import PreLoading from '../../pages/pre-loading/pre-loading';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { Toast, showToast } = useCustomToast();
+  const { isLoading } = useAppSelector((state) => state.authStatus);
 
   useEffect(() => {
     dispatch(getOffers());
-    dispatch(checkAuthAction()).unwrap().catch((showToast));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // showToast добавить зависимость куча логов и рендеров
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+
+  if(isLoading){
+    return <PreLoading />;
+  }
 
   return (
-    <>
-      <Toast />
-
-      <Routes>
-        <Route path={AppRoute.Main} element={<Layout />}>
-          <Route index element={<MainPage />} />
-          <Route path={AppRoute.Login} element={<MainLogin />} />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute>
-                <Favorites />
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoute.Offer} element={<Offer />} />
-        </Route>
-        <Route path="*" element={<NoMainPage />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path={AppRoute.Main} element={<Layout />}>
+        <Route index element={<MainPage />} />
+        <Route path={AppRoute.Login} element={<MainLogin />} />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.Offer} element={<Offer />} />
+      </Route>
+      <Route path="*" element={<NoMainPage />} />
+    </Routes>
   );
 };
 

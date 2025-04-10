@@ -6,24 +6,21 @@ import { getOffer, getOffersNearby } from '../../services/api-action/offer-actio
 import { selectFirstFewOffers } from '../../store/offer/offer-selector';
 import PreLoading from '../pre-loading/pre-loading';
 import PlacesList from '../../components/places-list/places-list';
-import { useCustomToast } from '../../hooks/use-custom-toast';
 
 const Offer = () => {
   const dispatch = useAppDispatch();
   const firstFewOffers = useAppSelector(selectFirstFewOffers);
   const isLoading = useAppSelector((state) => state.offer.isLoading);
   const { id } = useParams();
-  const { Toast, showToast } = useCustomToast();
 
   useEffect(() => {
     if(!id){
       return;
     }
 
-    dispatch(getOffer(id)).unwrap().catch(showToast);
-    dispatch(getOffersNearby(id)).unwrap().catch(showToast);
+    dispatch(getOffer(id));
+    dispatch(getOffersNearby(id));
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, id]);
 
   if(isLoading){
@@ -34,7 +31,6 @@ const Offer = () => {
   return(
     <main className="page__main page__main--offer">
       <SectionOffer />
-      <Toast />
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighborhood</h2>

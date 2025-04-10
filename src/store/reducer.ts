@@ -4,6 +4,7 @@ import authReducer from './auth/auth-reducer';
 import favoritesReducer from './favorite/favorites-reducer';
 import offerReducer from './offer/offer-reducer';
 import activeCardReducer from './active-card/card-reducer';
+import toastReducer from './toast-reducer';
 
 
 const rootReducers = combineReducers({
@@ -12,6 +13,7 @@ const rootReducers = combineReducers({
   favorites: favoritesReducer,
   offer: offerReducer,
   card: activeCardReducer,
+  error: toastReducer,
 });
 
 export default rootReducers;

@@ -1,9 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { loginAction } from '../../services/api-action/user-process';
 import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
-import { AppRoute } from '../const';
-import ErrorMessage from '../error-message/error-message';
+
 
 type FormValid = {
   password: string;
@@ -18,27 +16,23 @@ const errorMessage = {
   server: 'Ошибка при входе. Проверьте email и пароль.'
 };
 
+type ErrorMessageProps = {
+  message?: string | null;
+};
+
+const FormError = ({message}: ErrorMessageProps) => {
+  if(!message){
+    return;
+  }
+  return <p className='error-message'> { message } </p>;
+};
 
 const FormLogin = () => {
-  const { register, setError, clearErrors, handleSubmit, formState: { errors, isValid } } = useForm<FormValid>({mode: 'onBlur', });
-
-  const showError = () => {
-    setError('root.serverError', {
-      type: 'manual',
-      message: errorMessage.server,
-    });
-    setTimeout(() => clearErrors('root.serverError'), 3000);
-  };
-
-  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormValid>({mode: 'onBlur', });
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormValid) => {
-
-    dispatch(loginAction(data))
-      .unwrap()
-      .then(() => navigate(AppRoute.Main))
-      .catch(() => showError());
+    dispatch(loginAction(data));
   };
 
   return (
@@ -57,7 +51,7 @@ const FormLogin = () => {
             },
           }) }
         />
-        <ErrorMessage message={errors.email?.message} />
+        <FormError message={errors.email?.message} />
       </div>
 
       <div className="login__input-wrapper form__input-wrapper">
@@ -69,7 +63,7 @@ const FormLogin = () => {
           {...register('password', {
             required: errorMessage.required,
             pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d).+$/,
+              value: /^(?=.*)(?=.*\d).+$/,
               message: errorMessage.password
             },
             minLength: {
@@ -78,10 +72,9 @@ const FormLogin = () => {
             }
           })}
         />
-        <ErrorMessage message={errors.password?.message} />
+        <FormError message={errors.password?.message} />
       </div>
       <button className="login__submit form__submit button" type="submit" disabled={!isValid}>Sign in</button>
-      {errors.root?.serverError && <ErrorMessage message={errors.root.serverError.message} />}
     </form>
   );
 };

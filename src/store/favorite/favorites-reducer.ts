@@ -4,10 +4,12 @@ import { getFavoriteAction, } from '../../services/api-action/favorite-action';
 
 type InitialState = {
   favorites: TypePlace[];
+  isLoading: boolean;
 }
 
 const initialState: InitialState = {
   favorites: [],
+  isLoading: false,
 };
 
 const favoritesReducer = createSlice({
@@ -21,6 +23,10 @@ const favoritesReducer = createSlice({
       })
       .addCase(getFavoriteAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getFavoriteAction.pending, (state) => {
+        state.isLoading = true;
       });
   }
 });
