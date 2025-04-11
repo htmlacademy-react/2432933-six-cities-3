@@ -19,6 +19,7 @@ const initialState :InitialState = {
   comments: [],
   userComment: null,
   isLoading: false,
+
 };
 
 const offerReducer = createSlice({

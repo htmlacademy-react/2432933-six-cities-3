@@ -3,9 +3,13 @@ import { saveToken, dropToken } from '../token';
 import { routeList } from './route-list';
 import { ThunkApiConfig } from './api-config';
 import { getFavoriteAction } from './favorite-action';
-import { AxiosError } from 'axios';
-import { ApiError } from './api-config';
+import { handleApiError } from '../handle-api-error';
 
+
+import {createAction} from '@reduxjs/toolkit';
+import { AppRoute } from '../../components/const';
+
+export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
 type AuthData = {
   email: string;
@@ -21,17 +25,8 @@ type User = {
   isPro: boolean;
 }
 
-
-const loginErrorAction = (err: unknown) => {
-  const error = err as AxiosError<ApiError>;
-  const status = error.response?.status ?? 500;
-
-  const errorMap: Record<number, ApiError> = {
-    401: { message: 'Не авторизован'},
-    404: { message: 'Ошибка Запроса. Попробуйте позже', },
-    500: { message: 'Ошибка сервера' }
-  };
-  return errorMap[status];
+const errorMessage = {
+  404: 'Ошибка Запроса. Попробуйте позже'
 };
 
 const checkAuthAction = createAsyncThunk<User, undefined, ThunkApiConfig>(
@@ -42,22 +37,22 @@ const checkAuthAction = createAsyncThunk<User, undefined, ThunkApiConfig>(
       dispatch(getFavoriteAction());
       return data;
     } catch (error) {
-      return rejectWithValue(loginErrorAction(error));
+      return rejectWithValue(handleApiError(error, errorMessage[404]));
     }
-
   },
 );
 
 
 const loginAction = createAsyncThunk<User, AuthData, ThunkApiConfig>(
   'user/loginAction',
-  async ({email, password}, {extra: api, rejectWithValue}) => {
+  async ({email, password}, {dispatch, extra: api, rejectWithValue}) => {
     try {
       const { data } = await api.post<User>(routeList.LOGIN, { email, password });
       saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Main));
       return data ;
     } catch (error) {
-      return rejectWithValue(loginErrorAction(error));
+      return rejectWithValue(handleApiError(error, errorMessage[404]));
     }
   }
 );

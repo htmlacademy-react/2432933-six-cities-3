@@ -45,7 +45,6 @@ const offersReducer = createSlice({
         state.isLoading = true;
       })
       .addCase(getOffers.rejected, (state) => {
-        state.error = 'Ошибка при загрузке данных';
         state.isLoading = false;
       })
       .addCase(getOffers.fulfilled, (state, action) => {

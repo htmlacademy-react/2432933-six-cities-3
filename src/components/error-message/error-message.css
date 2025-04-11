@@ -10,3 +10,7 @@
   z-index: 1000;
   font-size: 16px;
 }
+
+.error-message-warn {
+  background-color: #ff9800;
+}
