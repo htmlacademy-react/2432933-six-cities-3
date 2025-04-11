@@ -11,13 +11,13 @@ const errorMap: ErrorMap = {
 };
 
 
-const handleApiError = (err: unknown, defaultMessage: string) => {
+const handleApiError = (err: unknown, message: string) => {
   const error = err as AxiosError<ApiError>;
   const status = error.response?.status ?? 500;
 
   const mappedError = errorMap[status];
   if(status === 404){
-    return {...mappedError, message: defaultMessage };
+    return {...mappedError, message: message };
   }
 
   return mappedError ?? {

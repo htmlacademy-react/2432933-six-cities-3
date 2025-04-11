@@ -4,7 +4,6 @@ import { TypePlace } from '../../types/place-type/place-type';
 import { Comment } from '../../types/offer-type/comment-type';
 import { updateFavoriteStatus } from '../../services/api-action/favorite-action';
 import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from '../../services/api-action/offer-action';
-import { ApiError } from '../../services/api-action/api-config';
 
 type InitialState = {
   offer: Offer | null;
@@ -12,7 +11,6 @@ type InitialState = {
   comments: Comment[];
   userComment: Comment | null;
   isLoading: boolean;
-  err: ApiError | null;
 };
 
 const initialState :InitialState = {
@@ -21,7 +19,7 @@ const initialState :InitialState = {
   comments: [],
   userComment: null,
   isLoading: false,
-  err: null,
+
 };
 
 const offerReducer = createSlice({
@@ -33,9 +31,6 @@ const offerReducer = createSlice({
       .addCase(getOffer.fulfilled, (state, action) => {
         state.offer = action.payload;
       })
-      /* .addCase(getOffer.rejected, (state, action) => {
-        state.err = action.payload ?? null;
-      }) */
       .addCase(getOffersNearby.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })

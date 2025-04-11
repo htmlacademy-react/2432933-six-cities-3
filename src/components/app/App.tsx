@@ -6,7 +6,7 @@ import NoMainPage from '../../pages/no-main-page/no-main-page';
 import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer-page';
-import { AppRoute, } from '../const';
+import { AppRoute, AuthorizationStatus, } from '../const';
 import { checkAuthAction } from '../../services/api-action/user-process';
 import { useAppDispatch, useAppSelector, } from '../../hooks/use-app-redux/use-app-redux';
 import { useEffect } from 'react';
@@ -15,14 +15,14 @@ import PreLoading from '../../pages/pre-loading/pre-loading';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.authStatus);
+  const { isLoading, auth} = useAppSelector((state) => state.authStatus);
 
   useEffect(() => {
     dispatch(getOffers());
     dispatch(checkAuthAction());
   }, [dispatch]);
 
-  if(isLoading){
+  if(isLoading && auth === AuthorizationStatus.Unknown){
     return <PreLoading />;
   }
 

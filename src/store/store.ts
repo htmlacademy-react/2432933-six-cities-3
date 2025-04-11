@@ -14,7 +14,7 @@ const store = configureStore({
         extraArgument: api,
       },
     })
-  ).concat(errorMiddleware).concat(redirectMiddleware),
+  ).concat(errorMiddleware, redirectMiddleware),
 });
 
 export {store};

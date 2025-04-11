@@ -8,10 +8,8 @@ const Toast = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setTimeout(() =>{
-      dispatch(removeError());
-    }, 3000);
-
+    const timer = setTimeout(() =>dispatch(removeError()), 3000);
+    return () => clearTimeout(timer);
   },[message, dispatch]);
 
   if (!message) {
