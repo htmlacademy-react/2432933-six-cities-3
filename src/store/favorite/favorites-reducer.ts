@@ -18,9 +18,6 @@ const favoritesReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFavoriteAction.rejected, (state) => {
-        state.favorites = [];
-      })
       .addCase(getFavoriteAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
         state.isLoading = false;

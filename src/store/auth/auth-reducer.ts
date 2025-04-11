@@ -15,7 +15,7 @@ type AuthState = {
     user: User | null;
     isAuth: boolean;
     isLoading: boolean;
-    auth: AuthorizationStatus;
+    authStatus: AuthorizationStatus;
   };
 
 
@@ -23,7 +23,7 @@ const initialState: AuthState = {
   user: null,
   isAuth: false,
   isLoading: false,
-  auth: AuthorizationStatus.NoAuth
+  authStatus: AuthorizationStatus.Unknown
 };
 
 const authReducer = createSlice({
@@ -34,16 +34,17 @@ const authReducer = createSlice({
     builder
       .addCase(checkAuthAction.pending, (state) => {
         state.isLoading = true;
-        state.auth = AuthorizationStatus.Unknown;
+        state.authStatus = AuthorizationStatus.Unknown;
       })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuth = true;
         state.isLoading = false;
-        state.auth = AuthorizationStatus.Auth;
+        state.authStatus = AuthorizationStatus.Auth;
       })
       .addCase(loginAction.rejected, (state) => {
         state.isAuth = false;
+        state.authStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.user = action.payload;

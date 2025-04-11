@@ -15,14 +15,14 @@ import PreLoading from '../../pages/pre-loading/pre-loading';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { isLoading, auth} = useAppSelector((state) => state.authStatus);
+  const { authStatus } = useAppSelector((state) => state.authStatus);
 
   useEffect(() => {
     dispatch(getOffers());
     dispatch(checkAuthAction());
   }, [dispatch]);
 
-  if(isLoading && auth === AuthorizationStatus.Unknown){
+  if(authStatus === AuthorizationStatus.Unknown){
     return <PreLoading />;
   }
 

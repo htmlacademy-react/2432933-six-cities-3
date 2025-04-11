@@ -1,33 +1,22 @@
 import { createAsyncThunk, } from '@reduxjs/toolkit';
-import { ApiError, ThunkApiConfig } from './api-config';
+import { ThunkApiConfig } from './api-config';
 import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
-import { AxiosError } from 'axios';
+import { handleApiError } from '../handle-api-error';
 
-
-const errorMap: Record<number, ApiError> = {
-  401: { message: 'Не авторизован'},
-  404: { message: 'Ошибка Запроса. Попробуйте позже', },
-  500: { message: 'Ошибка сервера' }
-};
-
-const loginErrorAction = (err: unknown) => {
-  const error = err as AxiosError<ApiError>;
-  const status = error.response?.status ?? 500;
-
-  return errorMap[status];
+const errorMap = {
+  OFFERS: 'Ошибка получения списка городов'
 };
 
 const getOffers = createAsyncThunk<TypePlace[], undefined, ThunkApiConfig >(
-  'data/fetchOffers',
+  'data/getOffers',
   async (_arg, {extra: api, rejectWithValue}) => {
     try {
       const {data} = await api.get<TypePlace[]>(routeList.OFFERS);
       return data;
     } catch (error) {
-      return rejectWithValue(loginErrorAction(error));
+      return rejectWithValue(handleApiError(error, errorMap.OFFERS));
     }
-
   },
 );
 
