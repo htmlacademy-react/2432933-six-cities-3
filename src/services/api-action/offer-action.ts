@@ -63,7 +63,7 @@ const addOfferComments = createAsyncThunk<Comment, { offerId: string; commentDat
 
     try{
       const { data } = await api.post<Comment>(routeList.USER_COMMENTS(offerId), commentData);
-      dispatch(getOfferComments(offerId));
+      await dispatch(getOfferComments(offerId));
       return data ;
     }catch (error) {
       return rejectWithValue(handleApiError(error, errorMessage.ADD_COMMENTS));

@@ -49,6 +49,7 @@ const loginAction = createAsyncThunk<User, AuthData, ThunkApiConfig>(
     try {
       const { data } = await api.post<User>(routeList.LOGIN, { email, password });
       saveToken(data.token);
+      dispatch(getFavoriteAction());
       dispatch(redirectToRoute(AppRoute.Main));
       return data ;
     } catch (error) {

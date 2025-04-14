@@ -10,7 +10,6 @@ type InitialState = {
   sorting: string;
   list: TypePlace[];
   isLoading : boolean;
-  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -18,7 +17,6 @@ const initialState: InitialState = {
   sorting: 'Popular',
   list: [],
   isLoading : false,
-  error: null,
 };
 
 const offersReducer = createSlice({
@@ -44,11 +42,7 @@ const offersReducer = createSlice({
       .addCase(getOffers.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getOffers.rejected, (state) => {
-        state.isLoading = false;
-      })
       .addCase(getOffers.fulfilled, (state, action) => {
-        state.error = null;
         state.isLoading = false;
         state.list = action.payload;
       });

@@ -3,7 +3,11 @@ import { createSelector } from '@reduxjs/toolkit';
 
 type State = ReturnType<typeof store.getState>;
 
-const selectOffersNearby = (state: State) => state.offer.offersNearby;
+enum NameSpace {
+  OFFER = 'offer'
+}
+
+const selectOffersNearby = (state: Pick<State, NameSpace.OFFER>) => state[NameSpace.OFFER].offersNearby;
 
 const MAX_PLACES = 3;
 
@@ -13,4 +17,4 @@ const selectFirstFewOffers = createSelector(
 );
 
 
-export { selectFirstFewOffers };
+export { selectFirstFewOffers, selectOffersNearby };
