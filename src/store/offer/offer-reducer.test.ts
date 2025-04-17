@@ -1,6 +1,7 @@
 import { makeFakeOffer, makeFakeComments, makeFakeComment } from '../../fake-data/fake-offer';
 import { makeFakeOffers, } from '../../fake-data/fakeOffers';
 import { getOffer, getOffersNearby, getOfferComments, addOfferComments,} from '../../services/api-action/offer.action';
+import { RequestStatus } from '../const';
 import offerReducer from './offer-reducer';
 
 const FAKE_ID_OFFER = 'test-offer-id';
@@ -10,6 +11,7 @@ const initialState = {
   comments: [],
   userComment: null,
   isLoading: false,
+  status: RequestStatus.INITIAL
 };
 
 describe('offerReducer', () => {
