@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, } from 'react-hook-form';
 import IconStar from './icon-star';
 import { useAppDispatch, } from '../../../../../hooks/use-app-redux/use-app-redux';
-import { addOfferComments } from '../../../../../services/api-action/offer-action';
+import { addOfferComments } from '../../../../../services/api-action/offer.action';
+import FormError from '../../../../../components/error-message/form-error';
 
 type FormValid = {
   comment: string;
@@ -16,8 +17,8 @@ const errorMessage = {
 
 
 const FormReviews = () => {
-  const form = useForm<FormValid>();
-  const { /* errors */ isValid } = form.formState;
+  const form = useForm<FormValid>({mode: 'onBlur'});
+  const { errors, isValid, } = form.formState;
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
@@ -47,8 +48,8 @@ const FormReviews = () => {
         name="rating"
         control={form.control}
         rules={{ required: 'Rating is required' }}
-        render={({ field }) => (
-          <IconStar onChange={field.onChange} value={field.value} />
+        render={({ field, fieldState: { error }}) => (
+          <IconStar onChange={field.onChange} value={field.value} error={error?.message}/>
         )}
       />
       <textarea
@@ -64,11 +65,17 @@ const FormReviews = () => {
           maxLength:{
             value: 300,
             message:errorMessage.MAX_LENGTH
-          }
+          },
+          onChange: () => {
+            if (errors.comment) {
+              form.clearErrors('comment');
+            }
+          },
         })}
+
       >
       </textarea>
-      {/* <ErrorMessage message={errors.comment?.message} /> */}
+      < FormError message={errors.comment?.message} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -80,7 +87,6 @@ const FormReviews = () => {
         >
           Submit
         </button>
-        {/* {errorStatus && <ErrorMessage message={''} />} */}
       </div>
     </form>
   );

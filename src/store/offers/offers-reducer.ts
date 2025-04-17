@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypePlace } from '../../types/place-type/place-type';
 import { updateFavoriteStatus,} from '../../services/api-action/favorite-action';
-import { getOffers } from '../../services/api-action/offers';
+import { getOffers } from '../../services/api-action/offers.action';
 
 const CITY_NAME_DEFAULT = 'Paris';
 
@@ -10,7 +10,6 @@ type InitialState = {
   sorting: string;
   list: TypePlace[];
   isLoading : boolean;
-  error: string | null;
 }
 
 const initialState: InitialState = {
@@ -18,7 +17,6 @@ const initialState: InitialState = {
   sorting: 'Popular',
   list: [],
   isLoading : false,
-  error: null,
 };
 
 const offersReducer = createSlice({
@@ -44,13 +42,12 @@ const offersReducer = createSlice({
       .addCase(getOffers.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getOffers.rejected, (state) => {
-        state.isLoading = false;
-      })
       .addCase(getOffers.fulfilled, (state, action) => {
-        state.error = null;
         state.isLoading = false;
         state.list = action.payload;
+      })
+      .addCase(getOffers.rejected, (state) => {
+        state.isLoading = false;
       });
   }
 });

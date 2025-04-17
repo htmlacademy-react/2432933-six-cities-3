@@ -4,12 +4,8 @@ import { routeList } from './route-list';
 import { ThunkApiConfig } from './api-config';
 import { getFavoriteAction } from './favorite-action';
 import { handleApiError } from '../handle-api-error';
-
-
-import {createAction} from '@reduxjs/toolkit';
+import { redirectToRoute } from '../../store/redirect-to-route';
 import { AppRoute } from '../../components/const';
-
-export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
 type AuthData = {
   email: string;
@@ -49,6 +45,7 @@ const loginAction = createAsyncThunk<User, AuthData, ThunkApiConfig>(
     try {
       const { data } = await api.post<User>(routeList.LOGIN, { email, password });
       saveToken(data.token);
+      dispatch(getFavoriteAction());
       dispatch(redirectToRoute(AppRoute.Main));
       return data ;
     } catch (error) {

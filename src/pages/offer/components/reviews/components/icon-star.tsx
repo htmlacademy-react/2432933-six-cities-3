@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import FormError from '../../../../../components/error-message/form-error';
 
 type Stars = {
   estimation: number;
@@ -15,11 +16,13 @@ const stars :Stars[] = [
  type IconStarProps = {
   onChange: (value: number) => void;
   value: number;
+  error?: string; // Добавляем проп для ошибки
  }
 
-const IconStar = ({onChange, value}: IconStarProps) => (
+const IconStar = ({onChange, value, error}: IconStarProps) => (
   <>
-    <label className="reviews__label form__label" htmlFor="review">Your review</label>
+    <label className="reviews__label form__label" htmlFor="review"> Your review</label>
+    {error && <FormError message={error} />}
     <div className="reviews__rating-form form__rating ">
       {stars.map(({estimation = 0, title}) => (
         <Fragment key={estimation}>

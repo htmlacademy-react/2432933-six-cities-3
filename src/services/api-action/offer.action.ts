@@ -5,23 +5,37 @@ import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
 import { Comment } from '../../types/offer-type/comment-type';
 import { handleApiError } from '../handle-api-error';
+import { redirectToRoute } from '../../store/redirect-to-route';
+import { AppRoute } from '../../components/const';
 
 const errorMessage = {
-  OFFER: 'Ошибка при загрузке данных Offer!',
-  NEARBY: 'Не удалось загрузить предложения неподолеку!',
-  COMMENTS: 'Не удалось загрузить список комментариев!',
-  ADD_COMMENTS: 'Не удалось отправить сообщение',
+  getOffer: {
+    404: 'Предложение не найдено',
+    401: 'Пожалуйста, войдите в систему',
+  },
+  getOffersNearby: {
+    404: 'Соседние предложения не найдены',
+    500: 'Ошибка сервера. Не удалось загрузить Соседние предложения '
+  },
+  getOfferComments: {
+    404: 'Не удалось загурзить комменатрии ',
+    500: 'Ошибка сервера. Не удалось загрузить комменатрии '
+  },
+  addOfferComments: {
+    404: 'Не удалось отправить комменатрии ',
+  }
 };
 
 
 const getOffer = createAsyncThunk<Offer, string, ThunkApiConfig>(
   'data/getOffer',
-  async (offerId, { extra: api, rejectWithValue }) => {
+  async (offerId, { extra: api, rejectWithValue, dispatch }) => {
     try {
       const {data} = await api.get<Offer>(routeList.OFFER(offerId));
       return data ;
     } catch (error) {
-      return rejectWithValue(handleApiError(error, errorMessage.OFFER));
+      dispatch(redirectToRoute(AppRoute.NotFound));
+      return rejectWithValue(handleApiError(error, errorMessage.getOffer));
     }
   }
 );
@@ -33,7 +47,7 @@ const getOffersNearby = createAsyncThunk<TypePlace[], string, ThunkApiConfig>(
       const {data} = await api.get<TypePlace[]>(routeList.OFFERS_NEARBY(offerId));
       return data ;
     }catch (error) {
-      return rejectWithValue(handleApiError(error, errorMessage.NEARBY));
+      return rejectWithValue(handleApiError(error, errorMessage.getOffersNearby));
     }
 
   }
@@ -47,7 +61,7 @@ const getOfferComments = createAsyncThunk<Comment[], string, ThunkApiConfig>(
       const {data} = await api.get<Comment[]>(routeList.COMMENTS(offerId));
       return data ;
     } catch (error) {
-      return rejectWithValue(handleApiError(error, errorMessage.COMMENTS));
+      return rejectWithValue(handleApiError(error, errorMessage.getOfferComments));
     }
   }
 );
@@ -63,10 +77,10 @@ const addOfferComments = createAsyncThunk<Comment, { offerId: string; commentDat
 
     try{
       const { data } = await api.post<Comment>(routeList.USER_COMMENTS(offerId), commentData);
-      dispatch(getOfferComments(offerId));
+      await dispatch(getOfferComments(offerId));
       return data ;
     }catch (error) {
-      return rejectWithValue(handleApiError(error, errorMessage.ADD_COMMENTS));
+      return rejectWithValue(handleApiError(error, errorMessage.addOfferComments));
     }
   }
 );

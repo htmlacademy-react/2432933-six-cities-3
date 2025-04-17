@@ -3,7 +3,7 @@ import FormLogin from '../../components/login/form-login';
 import LocationsCurrent from '../../components/login/locations-current';
 import { useAppSelector, useAppDispatch } from '../../hooks/use-app-redux/use-app-redux';
 import { AppRoute } from '../../components/const';
-import {redirectToRoute} from '../../services/api-action/user-process';
+import { redirectToRoute } from '../../store/redirect-to-route';
 
 const MainLogin = () => {
   const isAuth = useAppSelector((state) => state.authStatus.isAuth);

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './no-main-page.css';
 
-const NoMainPage = () => (
+const NotFound = () => (
   <main className="page  no-page">
     <h1 className="visually-hidden"> No Cities</h1>
     <div className="section">
@@ -12,4 +12,4 @@ const NoMainPage = () => (
   </main>
 );
 
-export default NoMainPage;
+export default NotFound;

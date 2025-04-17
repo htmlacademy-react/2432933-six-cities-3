@@ -2,10 +2,11 @@ import { createAsyncThunk, } from '@reduxjs/toolkit';
 import { ThunkApiConfig } from './api-config';
 import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
-import { handleApiError } from '../handle-api-error';
+import { handleApiError} from '../handle-api-error';
 
-const errorMap = {
-  OFFERS: 'Ошибка получения списка городов'
+const errorOffersMap = {
+  404: 'Ошибка получения списка городов',
+  400: 'Не коректный запрос',
 };
 
 const getOffers = createAsyncThunk<TypePlace[], undefined, ThunkApiConfig >(
@@ -15,7 +16,7 @@ const getOffers = createAsyncThunk<TypePlace[], undefined, ThunkApiConfig >(
       const {data} = await api.get<TypePlace[]>(routeList.OFFERS);
       return data;
     } catch (error) {
-      return rejectWithValue(handleApiError(error, errorMap.OFFERS));
+      return rejectWithValue(handleApiError(error, errorOffersMap));
     }
   },
 );

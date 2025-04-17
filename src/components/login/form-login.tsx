@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { loginAction } from '../../services/api-action/user-process';
 import { useAppDispatch, } from '../../hooks/use-app-redux/use-app-redux';
-
+import FormError from '../error-message/form-error';
 
 type FormValid = {
   password: string;
@@ -14,17 +14,6 @@ const errorMessage = {
   required: 'Это обязательное поле',
   minLength: 'Длина строки должна быть не меньше 4 символов',
   server: 'Ошибка при входе. Проверьте email и пароль.'
-};
-
-type ErrorMessageProps = {
-  message?: string | null;
-};
-
-const FormError = ({message}: ErrorMessageProps) => {
-  if(!message){
-    return;
-  }
-  return <p className='error-message'> { message } </p>;
 };
 
 const FormLogin = () => {

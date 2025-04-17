@@ -8,7 +8,7 @@ import Inside from './inside';
 import PropertyHost from './property-host';
 import Reviews from './reviews/reviews';
 import CitiesMap from '../../../components/cities-map/cities-map';
-import { selectFirstFewOffers } from '../../../store/offer/offer-selector';
+import { selectFirstFewOffers } from '../../../store/offer/offer.selector';
 
 const SectionOffer = () => {
   const isPremium = useAppSelector((state) => state.offer.offer?.isPremium);

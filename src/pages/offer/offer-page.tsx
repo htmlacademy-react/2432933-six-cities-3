@@ -2,8 +2,8 @@ import { useEffect, } from 'react';
 import { useParams } from 'react-router-dom';
 import SectionOffer from './components/section-offer';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
-import { getOffer, getOffersNearby } from '../../services/api-action/offer-action';
-import { selectFirstFewOffers } from '../../store/offer/offer-selector';
+import { getOffer, getOffersNearby } from '../../services/api-action/offer.action';
+import { selectFirstFewOffers } from '../../store/offer/offer.selector';
 import PreLoading from '../pre-loading/pre-loading';
 import PlacesList from '../../components/places-list/places-list';
 
@@ -17,7 +17,6 @@ const Offer = () => {
     if(!id){
       return;
     }
-
     dispatch(getOffer(id));
     dispatch(getOffersNearby(id));
 
@@ -26,7 +25,6 @@ const Offer = () => {
   if(isLoading){
     return <PreLoading />;
   }
-
 
   return(
     <main className="page__main page__main--offer">
