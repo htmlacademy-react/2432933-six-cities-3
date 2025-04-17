@@ -9,6 +9,7 @@ import { routeList } from './route-list';
 import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from './offer.action';
 import { ThunkDispatch } from 'redux-thunk';
 import { makeFakeComment, makeFakeOffers, makeFakeComments} from '../../fake-data/fakeOffers';
+import { redirectToRoute } from '../../store/redirect-to-route';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
@@ -58,8 +59,7 @@ describe('Async actions', () => {
       const actions = store.getActions();
 
       expect(result.meta.requestStatus).toBe('rejected');
-      expect(extractActionsTypes(actions)).toEqual([ getOffer.pending.type, getOffer.rejected.type ]);
-
+      expect(extractActionsTypes(actions)).toEqual([ getOffer.pending.type, redirectToRoute.type, getOffer.rejected.type ]);
     });
 
     it('should dispatch getOffersNearby with thunk', async () => {
