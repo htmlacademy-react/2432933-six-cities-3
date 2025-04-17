@@ -1,6 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { NameSpace } from '../const';
-import { Offer } from '../../types/offer-type/offer-type';
 import { State } from '../../types/state';
 
 
@@ -9,7 +8,7 @@ const MAX_COMMENTS = 10;
 
 const selectOffersNearby = (state: Pick<State, NameSpace.OFFER>) => state[NameSpace.OFFER].offersNearby;
 const selectOffersComments = (state: Pick<State, NameSpace.OFFER>) => state[NameSpace.OFFER].comments;
-const selectOffer = (state: Pick<State, NameSpace.OFFER>): Offer => state[NameSpace.OFFER].offer;
+const selectOffer = (state: Pick<State, NameSpace.OFFER>) => state[NameSpace.OFFER].offer;
 
 
 const selectSortToLimited = createSelector(

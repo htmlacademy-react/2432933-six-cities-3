@@ -9,7 +9,7 @@ const FavoriteTitle = () => {
   const status = useAppSelector((state) => state.offer.status);
   const offer = useAppSelector(selectOffer);
 
-  const { isFavorite, id , title} = offer || {};
+  const { isFavorite = false, id = '', title} = offer || {};
   const handleFavoriteClick = useToggleFavorite(id , isFavorite);
 
   return (
