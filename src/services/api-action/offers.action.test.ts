@@ -8,7 +8,7 @@ import { State } from '../../types/state';
 import { ThunkDispatch } from 'redux-thunk';
 import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
-import { getOffers } from './offers';
+import { getOffers } from './offers.action';
 import { makeFakeOffers } from '../../fake-data/fakeOffers';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;

@@ -4,12 +4,8 @@ import { routeList } from './route-list';
 import { ThunkApiConfig } from './api-config';
 import { getFavoriteAction } from './favorite-action';
 import { handleApiError } from '../handle-api-error';
-
-
-import {createAction} from '@reduxjs/toolkit';
+import { redirectToRoute } from '../../store/redirect-to-route';
 import { AppRoute } from '../../components/const';
-
-export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
 type AuthData = {
   email: string;

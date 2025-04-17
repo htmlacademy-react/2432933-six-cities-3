@@ -20,5 +20,6 @@ const GalleryContainer = () => {
     </div>
   );
 };
+
 export default GalleryContainer;
 

@@ -6,7 +6,7 @@ import { setSorting } from '../../../store/offers/offers-reducer';
 const options = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 const PlacesSorting = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const selectSort = useAppSelector((state) => state.offers.sorting);
 

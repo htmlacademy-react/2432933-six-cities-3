@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
 import './error-message.css';
-import { removeError } from '../../store/toast-reducer';
+import { removeError } from '../../store/toast.reducer';
 
 const Toast = () => {
   const { message, type } = useAppSelector((state) => state.error);

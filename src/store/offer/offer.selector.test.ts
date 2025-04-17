@@ -1,5 +1,5 @@
 import { makeFakeOffers } from '../../fake-data/fakeOffers';
-import { selectFirstFewOffers } from './offer-selector';
+import { selectFirstFewOffers } from './offer.selector';
 
 const initialState = {
   offer: null,

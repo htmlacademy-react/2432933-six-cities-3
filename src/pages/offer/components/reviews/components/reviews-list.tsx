@@ -1,5 +1,6 @@
 import { calculateRatingWidth } from '../../../../../utils/calculate-rating-width';
 import { useAppSelector } from '../../../../../hooks/use-app-redux/use-app-redux';
+import { selectSortToLimited } from '../../../../../store/offer/offer.selector';
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -7,7 +8,7 @@ const formatDate = (dateString: string) => {
 };
 
 const ReviewsList = () => {
-  const comments = useAppSelector((state) => state.offer.comments);
+  const comments = useAppSelector(selectSortToLimited);
 
   return (
     <ul className="reviews__list">

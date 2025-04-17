@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ReviewsList from './components/reviews-list';
 import FormReviews from './components/form-reviews';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/use-app-redux/use-app-redux';
-import { getOfferComments } from '../../../../services/api-action/offer-action';
+import { getOfferComments } from '../../../../services/api-action/offer.action';
 
 const Reviews = () => {
   const dispatch = useAppDispatch();

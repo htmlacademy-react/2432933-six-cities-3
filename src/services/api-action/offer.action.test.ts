@@ -6,7 +6,7 @@ import { createAPI } from '../api';
 import { State } from '../../types/state';
 import { makeFakeOffer } from '../../fake-data/fake-offer';
 import { routeList } from './route-list';
-import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from './offer-action';
+import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from './offer.action';
 import { ThunkDispatch } from 'redux-thunk';
 import { makeFakeComment, makeFakeOffers, makeFakeComments} from '../../fake-data/fakeOffers';
 

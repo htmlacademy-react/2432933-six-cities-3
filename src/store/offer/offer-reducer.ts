@@ -3,7 +3,7 @@ import { Offer } from '../../types/offer-type/offer-type';
 import { TypePlace } from '../../types/place-type/place-type';
 import { Comment } from '../../types/offer-type/comment-type';
 import { updateFavoriteStatus } from '../../services/api-action/favorite-action';
-import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from '../../services/api-action/offer-action';
+import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from '../../services/api-action/offer.action';
 
 type InitialState = {
   offer: Offer | null;

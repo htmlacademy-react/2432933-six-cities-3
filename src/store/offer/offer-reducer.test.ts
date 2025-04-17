@@ -1,6 +1,6 @@
 import { makeFakeOffer, makeFakeComments, makeFakeComment } from '../../fake-data/fake-offer';
 import { makeFakeOffers, } from '../../fake-data/fakeOffers';
-import { getOffer, getOffersNearby, getOfferComments, addOfferComments,} from '../../services/api-action/offer-action';
+import { getOffer, getOffersNearby, getOfferComments, addOfferComments,} from '../../services/api-action/offer.action';
 import offerReducer from './offer-reducer';
 
 const FAKE_ID_OFFER = 'test-offer-id';

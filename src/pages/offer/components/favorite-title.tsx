@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 import { useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
-import { useFavorite } from '../../../hooks/use-favorite';
+import { useToggleFavorite } from '../../../hooks/use-toggle-favorite';
 
 
 const FavoriteTitle = () => {
   const title = useAppSelector((state) => state.offer.offer?.title);
   const id = useAppSelector((state) => state.offer.offer?.id) ?? '';
   const isFavorite = useAppSelector((state) => state.offer.offer?.isFavorite) ?? false;
-  const handleFavoriteClick = useFavorite(id , isFavorite);
+  /* const { title, id, isFavorite} = useAppSelector((state) => state.offer.offer); */
+  const handleFavoriteClick = useToggleFavorite(id , isFavorite);
 
   return (
     <div className="offer__name-wrapper">

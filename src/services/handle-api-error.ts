@@ -5,24 +5,21 @@ type ErrorMap = Record<number, ApiError>
 
 const errorMap: ErrorMap = {
   401: { message: 'Не авторизован', type: 'warn'},
-  400: { message: 'Введены не корректные данные '},
-  404: { message: '' },
-  500: { message: 'Ошибка сервера' }
+  400: { message: 'Введены не корректные данные', type: 'error'},
+  404: { message: 'Not Found' , type: 'error'},
+  500: { message: 'Ошибка сервера', type: 'error' }
 };
 
-
-const handleApiError = (err: unknown, message: string) => {
+const handleApiError = (err: unknown, errorMessage: Record<number, string>) => {
   const error = err as AxiosError<ApiError>;
   const status = error.response?.status ?? 500;
+  const defaultError = errorMap[status] ?? { message: error.response?.data?.message, type: 'error' };
+  const customMessage = errorMessage[status];
 
-  const mappedError = errorMap[status];
-  if(status === 404){
-    return {...mappedError, message: message };
-  }
-
-  return mappedError ?? {
-    message: error.response?.data?.message || 'Неизвестная ошибка',
-    type: 'error'
+  return {
+    message: customMessage ?? defaultError.message,
+    code: status,
+    type: defaultError.type ?? 'error',
   };
 };
 

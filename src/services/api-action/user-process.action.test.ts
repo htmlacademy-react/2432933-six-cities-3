@@ -7,7 +7,8 @@ import { createAPI } from '../api';
 import { State } from '../../types/state';
 import { AuthorizationStatus } from '../../components/const';
 import { routeList } from './route-list';
-import { checkAuthAction, loginAction, logoutAction, redirectToRoute } from './user-process';
+import { checkAuthAction, loginAction, logoutAction} from './user-process';
+import { redirectToRoute } from '../../store/redirect-to-route';
 import { getFavoriteAction } from './favorite-action';
 import * as tokenStorage from '../../services/token';
 

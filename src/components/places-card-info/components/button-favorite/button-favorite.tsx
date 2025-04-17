@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useFavorite } from '../../../../hooks/use-favorite';
+import { useToggleFavorite } from '../../../../hooks/use-toggle-favorite';
 
 type ButtonFavoriteProps = {
   isFavorite :boolean;
@@ -7,7 +7,7 @@ type ButtonFavoriteProps = {
 }
 
 const ButtonFavorite = ({id, isFavorite} :ButtonFavoriteProps) => {
-  const handleFavoriteClick = useFavorite(id, isFavorite);
+  const handleFavoriteClick = useToggleFavorite(id, isFavorite);
 
   return (
     <button

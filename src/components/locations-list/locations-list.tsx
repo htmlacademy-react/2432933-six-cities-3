@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { cities } from '../const';
 import { useAppSelector, useAppDispatch } from '../../hooks/use-app-redux/use-app-redux';
 import { setCity } from '../../store/offers/offers-reducer';
-
+import { Link } from 'react-router-dom';
 
 const LocationsList = () => {
   const dispatch = useAppDispatch();
@@ -18,12 +18,13 @@ const LocationsList = () => {
         <ul className="locations__list tabs__list">
           {cities.map((city) => (
             <li className="locations__item" key={city}>
-              <a
+              <Link
                 className={clsx('locations__item-link tabs__item', {'tabs__item--active': cityName === city})}
                 onClick={() => handleFilter(city)}
+                to={'/'}
               >
                 <span>{city}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -31,4 +32,5 @@ const LocationsList = () => {
     </div>
   );
 };
+
 export default LocationsList;
