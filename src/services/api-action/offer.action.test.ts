@@ -16,14 +16,6 @@ const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }
 
 const OFFER_ID = 'offer-id-test';
 
-const OFFER_STATE = {
-  offer: null,
-  offersNearby: [],
-  comments: [],
-  userComment: null,
-  isLoading: false,
-};
-
 describe('Async actions', () => {
   const axios = createAPI();
   const mockAxiosAdapter = new MockAdapter(axios);
@@ -33,7 +25,7 @@ describe('Async actions', () => {
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
-    store = mockStoreCreator({ offer: { ...OFFER_STATE }}); // что тут указываем ?
+    store = mockStoreCreator({ offer: {}});
   });
 
   describe('Async actions Offer', () => {

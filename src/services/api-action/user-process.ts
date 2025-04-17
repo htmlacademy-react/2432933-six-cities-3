@@ -3,7 +3,7 @@ import { saveToken, dropToken } from '../token';
 import { routeList } from './route-list';
 import { ThunkApiConfig } from './api-config';
 import { getFavoriteAction } from './favorite-action';
-import { handleApiError } from '../handle-api-error';
+import { handleApiError } from '../../utils/handle-api-error';
 import { redirectToRoute } from '../../store/redirect-to-route';
 import { AppRoute } from '../../components/const';
 

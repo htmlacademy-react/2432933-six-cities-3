@@ -4,6 +4,7 @@ import { TypePlace } from '../../types/place-type/place-type';
 import { Comment } from '../../types/offer-type/comment-type';
 import { updateFavoriteStatus } from '../../services/api-action/favorite-action';
 import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from '../../services/api-action/offer.action';
+import { RequestStatus } from '../const';
 
 type InitialState = {
   offer: Offer | null;
@@ -11,6 +12,7 @@ type InitialState = {
   comments: Comment[];
   userComment: Comment | null;
   isLoading: boolean;
+  status: string;
 };
 
 const initialState :InitialState = {
@@ -19,7 +21,7 @@ const initialState :InitialState = {
   comments: [],
   userComment: null,
   isLoading: false,
-
+  status: RequestStatus.INITIAL,
 };
 
 const offerReducer = createSlice({
@@ -28,8 +30,15 @@ const offerReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getOffer.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(getOffer.fulfilled, (state, action) => {
         state.offer = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getOffer.rejected, (state) => {
+        state.isLoading = false;
       })
       .addCase(getOffersNearby.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
@@ -43,7 +52,11 @@ const offerReducer = createSlice({
       .addCase(updateFavoriteStatus.fulfilled, (state, action) => {
         if(state.offer){
           state.offer.isFavorite = action.payload.isFavorite;
+          state.status = RequestStatus.SUCCESS;
         }
+      })
+      .addCase(updateFavoriteStatus.pending, (state) => {
+        state.status = RequestStatus.LOADING;
       });
   }
 });

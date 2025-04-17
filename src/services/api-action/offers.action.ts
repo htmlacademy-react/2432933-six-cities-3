@@ -2,7 +2,7 @@ import { createAsyncThunk, } from '@reduxjs/toolkit';
 import { ThunkApiConfig } from './api-config';
 import { TypePlace } from '../../types/place-type/place-type';
 import { routeList } from './route-list';
-import { handleApiError} from '../handle-api-error';
+import { handleApiError} from '../../utils/handle-api-error';
 
 const errorOffersMap = {
   404: 'Ошибка получения списка городов',

@@ -3,4 +3,10 @@ enum NameSpace {
   OFFERS = 'offers'
 }
 
-export { NameSpace };
+const RequestStatus = {
+  SUCCESS: 'success',
+  LOADING: 'loading',
+  INITIAL: 'initial',
+};
+
+export { NameSpace, RequestStatus };
