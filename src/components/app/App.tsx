@@ -7,11 +7,11 @@ import PrivateRoute from '../private-route/private-route';
 import Favorites from '../../pages/favorites/favorites';
 import Offer from '../../pages/offer/offer-page';
 import { AppRoute, AuthorizationStatus, } from '../const';
-import { checkAuthAction } from '../../services/api-action/user-process';
+import { checkAuthAction } from '../../services/api-action/user-process-action/user-process.action';
 import { useAppDispatch, useAppSelector, } from '../../hooks/use-app-redux/use-app-redux';
 import { useEffect } from 'react';
-import { getOffers } from '../../services/api-action/offers.action';
 import PreLoading from '../../pages/pre-loading/pre-loading';
+import { getOffers } from '../../services/api-action/offers-action/offers.action';
 
 const App = () => {
   const dispatch = useAppDispatch();

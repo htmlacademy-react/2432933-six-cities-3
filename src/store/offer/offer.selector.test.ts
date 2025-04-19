@@ -1,4 +1,5 @@
 import { makeFakeOffers } from '../../fake-data/fakeOffers';
+import { RequestStatus } from '../const';
 import { selectFirstFewOffers } from './offer.selector';
 
 const initialState = {
@@ -7,6 +8,8 @@ const initialState = {
   comments: [],
   userComment: null,
   isLoading: false,
+  status: RequestStatus.Initial,
+  commentStatus: RequestStatus.Initial
 };
 
 

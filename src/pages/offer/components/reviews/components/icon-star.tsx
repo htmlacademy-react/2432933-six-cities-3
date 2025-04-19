@@ -5,7 +5,7 @@ type Stars = {
   estimation: number;
   title: string;
 }
-const stars :Stars[] = [
+const stars: Stars[] = [
   { estimation: 5, title: 'perfect' },
   { estimation: 4, title: 'good' },
   { estimation: 3, title: 'not bad' },

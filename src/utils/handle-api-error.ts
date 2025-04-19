@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ApiError } from './api-action/api-config';
+import { ApiError } from '../services/api-action/api-config';
 
 type ErrorMap = Record<number, ApiError>
 

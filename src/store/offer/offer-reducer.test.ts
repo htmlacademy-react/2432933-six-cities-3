@@ -1,6 +1,7 @@
 import { makeFakeOffer, makeFakeComments, makeFakeComment } from '../../fake-data/fake-offer';
 import { makeFakeOffers, } from '../../fake-data/fakeOffers';
-import { getOffer, getOffersNearby, getOfferComments, addOfferComments,} from '../../services/api-action/offer.action';
+import { getOffer, getOffersNearby, getOfferComments, addOfferComments } from '../../services/api-action/offer-action/offer.action';
+import { RequestStatus } from '../const';
 import offerReducer from './offer-reducer';
 
 const FAKE_ID_OFFER = 'test-offer-id';
@@ -10,6 +11,8 @@ const initialState = {
   comments: [],
   userComment: null,
   isLoading: false,
+  status: RequestStatus.Initial,
+  commentStatus: RequestStatus.Initial
 };
 
 describe('offerReducer', () => {
@@ -21,7 +24,7 @@ describe('offerReducer', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should handle getOffer.rejected action', () => { // Есть смылс в обрабокте оишбок если они не храняться  сторе?
+  it('should handle getOffer.rejected action', () => {
     const error = new Error('Request failed');
     const action = getOffer.rejected(error, '', 'offer-id', {message: 'Error message'});
 
@@ -48,7 +51,7 @@ describe('offerReducer', () => {
   it('should  set "addOfferComments.fulfilled" action', () => {
     const mockComment = makeFakeComment();
     const mockUserComment = { comment: 'Test comment', rating: 5 };
-    const expectedState = { ...initialState, userComment: mockComment };
+    const expectedState = { ...initialState, userComment: mockComment, commentStatus: RequestStatus.Success };
 
     const result = offerReducer(undefined, addOfferComments.fulfilled(mockComment, '', {offerId: FAKE_ID_OFFER, commentData: mockUserComment}));
     expect(result).toEqual(expectedState);

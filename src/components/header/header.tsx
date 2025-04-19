@@ -5,6 +5,7 @@ import { useRouteConfig } from '../../hooks/use-route-config/use-route-config';
 
 const Header = () => {
   const {isShown, isActive} = useRouteConfig();
+
   return (
     <header className="header">
       <div className="container">

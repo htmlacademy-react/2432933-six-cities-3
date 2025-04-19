@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NameSpace } from '../const';
 
 type InitialState = {
   activeCard: string | null;
@@ -9,7 +10,7 @@ const initialState: InitialState = {
 };
 
 const activeCardReducer = createSlice({
-  name: 'offers',
+  name: NameSpace.Card,
   initialState,
   reducers: {
     setActiveCard(state, action: PayloadAction<string | null>) {

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NameSpace } from '../const';
 
 type InitialState = {
  type: string | null;
@@ -13,7 +14,7 @@ const initialState :InitialState = {
 
 
 const toastReducer = createSlice({
-  name: 'toast',
+  name: NameSpace.Toast,
   initialState,
   reducers: {
     setError(state, action: PayloadAction<{message: string; type: string}>) {

@@ -24,7 +24,6 @@ const LocationsItems = (offer: TypePlace) => (
           <h2 className="place-card__name"> {offer.title} </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>
-
       </article>
     </Link>
   </li>

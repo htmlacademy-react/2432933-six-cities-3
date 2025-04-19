@@ -31,7 +31,6 @@ const SectionFavorites = () => {
               ))}
             </ul>
           </li>
-
         )
         )}
       </ul>

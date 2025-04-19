@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import { useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
 import { useToggleFavorite } from '../../../hooks/use-toggle-favorite';
+import { selectOffer } from '../../../store/offer/offer.selector';
+import { RequestStatus } from '../../../store/const';
 
 
 const FavoriteTitle = () => {
-  const title = useAppSelector((state) => state.offer.offer?.title);
-  const id = useAppSelector((state) => state.offer.offer?.id) ?? '';
-  const isFavorite = useAppSelector((state) => state.offer.offer?.isFavorite) ?? false;
-  /* const { title, id, isFavorite} = useAppSelector((state) => state.offer.offer); */
+  const status = useAppSelector((state) => state.offer.status);
+  const offer = useAppSelector(selectOffer);
+
+  const { isFavorite = false, id = '', title} = offer || {};
   const handleFavoriteClick = useToggleFavorite(id , isFavorite);
 
   return (
@@ -18,7 +20,8 @@ const FavoriteTitle = () => {
       <button
         className={clsx('offer__bookmark-button button', {'offer__bookmark-button--active' : isFavorite})}
         type="button"
-        onClick={ handleFavoriteClick }
+        onClick={handleFavoriteClick}
+        disabled = {status === RequestStatus.Loading}
       >
         <svg className="offer__bookmark-icon" width="31" height="33">
           <use xlinkHref="#icon-bookmark"></use>

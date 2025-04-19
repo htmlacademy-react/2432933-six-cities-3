@@ -1,5 +1,5 @@
 import favoritesReducer from './favorites-reducer';
-import { getFavoriteAction } from '../../services/api-action/favorite-action';
+import { getFavoriteAction } from '../../services/api-action/favorites-action/favorite-action';
 import { makeFakeOffers } from '../../fake-data/fakeOffers';
 
 describe('favoritesReducer', () => {

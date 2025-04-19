@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './use-app-redux/use-app-redux';
 import { AppRoute } from '../components/const';
-import { updateFavoriteStatus } from '../services/api-action/favorite-action';
+import { updateFavoriteStatus } from '../services/api-action/favorites-action/favorite-action';
+
 
 const useToggleFavorite = (id: string, isFavorite: boolean) => {
   const isAuth = useAppSelector((state) => state.authStatus.isAuth);
@@ -10,7 +11,7 @@ const useToggleFavorite = (id: string, isFavorite: boolean) => {
 
   const handleFavoriteClick = () => {
     if (!isAuth) {
-      navigate(AppRoute.Login);
+      return navigate(AppRoute.Login);
     }
 
     dispatch(updateFavoriteStatus({offerId: id, isFavorite: !isFavorite}));

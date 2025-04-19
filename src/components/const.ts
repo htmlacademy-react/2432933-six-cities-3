@@ -13,6 +13,5 @@ enum AuthorizationStatus {
 }
 
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam' , 'Hamburg', 'Dusseldorf'];
-const CITY_NAME_DEFAULT = 'Paris';
 
-export {AppRoute , AuthorizationStatus, cities, CITY_NAME_DEFAULT};
+export { AppRoute , AuthorizationStatus, cities };
