@@ -11,7 +11,7 @@ const ButtonFavorite = ({id, isFavorite} :ButtonFavoriteProps) => {
 
   return (
     <button
-      className={clsx('place-card__bookmark-button button', { ['place-card__bookmark-button--active'] : isFavorite})}
+      className={clsx('place-card__bookmark-button button', {'place-card__bookmark-button--active': isFavorite})}
       type="button"
       onClick={(evt) => {
         evt.preventDefault();
