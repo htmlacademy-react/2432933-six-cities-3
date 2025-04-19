@@ -16,7 +16,7 @@ const stars: Stars[] = [
  type IconStarProps = {
   onChange: (value: number) => void;
   value: number;
-  error?: string; // Добавляем проп для ошибки
+  error?: string;
  }
 
 const IconStar = ({onChange, value, error}: IconStarProps) => (

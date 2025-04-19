@@ -6,7 +6,7 @@ type LogoProps = {
 }
 
 const Logo = ({isActive} :LogoProps) => {
-  const isActiveValue = clsx({ 'header__logo-link--active': isActive,});
+  const isActiveValue = clsx({'header__logo-link--active': isActive,});
 
   return (
     <div className="header__left">

@@ -1,5 +1,4 @@
 import axios, { AxiosInstance,} from 'axios';
-//import {StatusCodes} from 'http-status-codes';
 import { getToken } from './token';
 
 const BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
