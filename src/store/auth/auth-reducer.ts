@@ -1,6 +1,7 @@
 import { createSlice, } from '@reduxjs/toolkit';
-import { checkAuthAction, loginAction, logoutAction } from '../../services/api-action/user-process';
+import { checkAuthAction, loginAction, logoutAction } from '../../services/api-action/user-process-action/user-process.action';
 import { AuthorizationStatus } from '../../components/const';
+import { NameSpace } from '../const';
 
 type User = {
   id: string;
@@ -25,7 +26,7 @@ const initialState: AuthState = {
 };
 
 const authReducer = createSlice({
-  name: 'auth',
+  name: NameSpace.Auth,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

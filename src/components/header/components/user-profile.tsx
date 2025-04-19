@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { logoutAction } from '../../../services/api-action/user-process';
+import { logoutAction } from '../../../services/api-action/user-process-action/user-process.action';
 import { useAppDispatch, useAppSelector } from '../../../hooks/use-app-redux/use-app-redux';
-import { MouseEvent } from 'react';
-
 
 const UserProfile = () => {
   const dispatch = useAppDispatch();
@@ -10,8 +8,7 @@ const UserProfile = () => {
   const favorites = useAppSelector((state)=> state.favorites.favorites);
 
 
-  const handleLogoutClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
+  const handleLogoutClick = () => {
     dispatch(logoutAction());
   };
 
@@ -27,9 +24,12 @@ const UserProfile = () => {
       </li>
 
       <li className="header__nav-item">
-        <Link className="header__nav-link" to="#" onClick={handleLogoutClick}>
+        <button
+          className="header__nav-link"
+          onClick={handleLogoutClick}
+        >
           <span className="header__signout">Sign out</span>
-        </Link>
+        </button>
       </li>
     </>
   );

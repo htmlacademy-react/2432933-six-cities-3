@@ -11,6 +11,7 @@ import { setActiveCard } from '../../store/active-card/card-reducer';
 const PlacesCardInfo = (place: TypePlace) => {
   const dispatch = useAppDispatch();
   const handleActiveCardChange = (id: string | null) => dispatch(setActiveCard(id));
+
   return (
     <Link
       to={`/offer/${place.id}`}

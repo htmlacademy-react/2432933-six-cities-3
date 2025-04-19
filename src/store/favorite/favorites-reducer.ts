@@ -1,6 +1,7 @@
 import { TypePlace } from '../../types/place-type/place-type';
 import { createSlice, } from '@reduxjs/toolkit';
-import { getFavoriteAction, } from '../../services/api-action/favorite-action';
+import { getFavoriteAction } from '../../services/api-action/favorites-action/favorite-action';
+import { NameSpace } from '../const';
 
 type InitialState = {
   favorites: TypePlace[];
@@ -13,7 +14,7 @@ const initialState: InitialState = {
 };
 
 const favoritesReducer = createSlice({
-  name: 'favorites',
+  name: NameSpace.Favorites,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

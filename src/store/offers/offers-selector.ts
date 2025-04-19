@@ -1,13 +1,12 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { store } from '../store';
-import {filtersOffers, sortingOffers, } from '../../pages/utils';
+import {filtersOffers, sortingOffers, } from '../../utils/filter-sort-offers';
 import { NameSpace } from '../const';
+import { State } from '../../types/state';
 
-type State = ReturnType<typeof store.getState>;
-const selectOffers = (state: Pick<State, NameSpace.OFFERS>) => state.offers.list;
-const selectCity = (state: Pick<State, NameSpace.OFFERS>) => state.offers.city;
-const selectSort = (state: Pick<State, NameSpace.OFFERS>) => state.offers.sorting;
-const selectName = (state: Pick<State, NameSpace.OFFERS>) => state.offers.city;
+const selectOffers = (state: Pick<State, NameSpace.Offers>) => state.offers.list;
+const selectCity = (state: Pick<State, NameSpace.Offers>) => state.offers.city;
+const selectSort = (state: Pick<State, NameSpace.Offers>) => state.offers.sorting;
+const selectName = (state: Pick<State, NameSpace.Offers>) => state.offers.city;
 
 const offersSelector = createSelector(
   [selectOffers, selectCity, selectSort],

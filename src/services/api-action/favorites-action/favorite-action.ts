@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { routeList } from './route-list';
-import { ThunkApiConfig } from './api-config';
-import { TypePlace } from '../../types/place-type/place-type';
-import { handleApiError } from '../../utils/handle-api-error';
+import { routeList } from '../route-list';
+import { ThunkApiConfig } from '../api-config';
+import { TypePlace } from '../../../types/place-type/place-type';
+import { handleApiError } from '../../../utils/handle-api-error';
 
 const errorMessage = {
   getFavoriteAction: {
@@ -41,7 +41,6 @@ const updateFavoriteStatus = createAsyncThunk<TypePlace, FavoriteStatus, ThunkAp
     } catch (error) {
       return rejectWithValue(handleApiError(error, errorMessage.updateFavoriteStatus));
     }
-
   }
 );
 

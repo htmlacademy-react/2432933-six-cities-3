@@ -2,14 +2,13 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
-import { createAPI } from '../api';
-import { State } from '../../types/state';
-///////////////
-import { ThunkDispatch } from 'redux-thunk';
-import { TypePlace } from '../../types/place-type/place-type';
-import { routeList } from './route-list';
+import { createAPI } from '../../api';
+import { State } from '../../../types/state';
 import { getOffers } from './offers.action';
-import { makeFakeOffers } from '../../fake-data/fakeOffers';
+import { routeList } from '../route-list';
+import { makeFakeOffers } from '../../../fake-data/fakeOffers';
+import { ThunkDispatch } from 'redux-thunk';
+import { TypePlace } from '../../../types/place-type/place-type';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);

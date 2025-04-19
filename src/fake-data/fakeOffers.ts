@@ -1,6 +1,7 @@
 import faker from 'faker';
 import { TypePlace } from '../types/place-type/place-type';
 import { Comment } from '../types/offer-type/comment-type';
+import { cities } from '../components/const';
 
 const MAX_RATING = 5;
 
@@ -11,9 +12,10 @@ const makeFakeLocation = () => ({
 });
 
 const makeFakeCity = () => ({
-  name: faker.datatype.string(),
+  name: cities[Math.floor(Math.random() * cities.length)],
   location: makeFakeLocation()
 });
+
 
 const makeFakePlace = (): TypePlace => ({
   id: faker.datatype.uuid(),

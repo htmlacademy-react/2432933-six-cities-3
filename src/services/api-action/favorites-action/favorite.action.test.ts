@@ -1,12 +1,13 @@
-import { extractActionsTypes, setupMockStore } from '../extract-actions-types';
-import { makeFakeOffers } from '../../fake-data/fakeOffers';
-import { routeList } from './route-list';
+import { extractActionsTypes, setupMockStore } from '../../test-helpers';
+import { makeFakeOffers } from '../../../fake-data/fakeOffers';
+import { routeList } from '../route-list';
 import { getFavoriteAction } from './favorite-action';
 
 
 describe('Async actions', () => {
   const { mockStoreCreator, mockAxiosAdapter} = setupMockStore();
   let store: ReturnType<typeof mockStoreCreator>;
+
   beforeEach(() => {
     store = mockStoreCreator({ offer: {}});
   });

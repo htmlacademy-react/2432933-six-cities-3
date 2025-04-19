@@ -8,7 +8,8 @@ const initialState = {
   comments: [],
   userComment: null,
   isLoading: false,
-  status: RequestStatus.INITIAL,
+  status: RequestStatus.Initial,
+  commentStatus: RequestStatus.Initial
 };
 
 

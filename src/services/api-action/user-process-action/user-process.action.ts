@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { saveToken, dropToken } from '../token';
-import { routeList } from './route-list';
-import { ThunkApiConfig } from './api-config';
-import { getFavoriteAction } from './favorite-action';
-import { handleApiError } from '../../utils/handle-api-error';
-import { redirectToRoute } from '../../store/redirect-to-route';
-import { AppRoute } from '../../components/const';
+import { saveToken, dropToken } from '../../token';
+import { routeList } from '../route-list';
+import { ThunkApiConfig } from '../api-config';
+import { getFavoriteAction } from '../favorites-action/favorite-action';
+import { handleApiError } from '../../../utils/handle-api-error';
+import { redirectToRoute } from '../../../store/redirect-to-route';
+import { AppRoute } from '../../../components/const';
 
 type AuthData = {
   email: string;
@@ -56,9 +56,13 @@ const loginAction = createAsyncThunk<User, AuthData, ThunkApiConfig>(
 
 const logoutAction = createAsyncThunk<void, undefined, ThunkApiConfig>(
   'user/logout',
-  async (_arg, {extra: api}) => {
-    await api.delete(routeList.LOG_OUT);
-    dropToken();
+  async (_arg, {extra: api, rejectWithValue}) => {
+    try {
+      await api.delete(routeList.LOG_OUT);
+      dropToken();
+    } catch (error) {
+      return rejectWithValue(handleApiError(error, errorMessage[404]));
+    }
   },
 );
 

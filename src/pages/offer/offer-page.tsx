@@ -2,10 +2,10 @@ import { useEffect, } from 'react';
 import { useParams } from 'react-router-dom';
 import SectionOffer from './components/section-offer';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-redux/use-app-redux';
-import { getOffer, getOffersNearby } from '../../services/api-action/offer.action';
 import { selectFirstFewOffers } from '../../store/offer/offer.selector';
 import PreLoading from '../pre-loading/pre-loading';
 import PlacesList from '../../components/places-list/places-list';
+import { getOffer, getOffersNearby} from '../../services/api-action/offer-action/offer.action';
 
 const Offer = () => {
   const dispatch = useAppDispatch();

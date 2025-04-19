@@ -3,7 +3,6 @@ import LocationsList from '../../components/locations-list/locations-list';
 import CitiesPlaces from './cities/cities-places';
 import PreLoading from '../pre-loading/pre-loading';
 
-
 const MainPage = () => {
   const isLoading = useAppSelector((state) => state.offers.isLoading);
 

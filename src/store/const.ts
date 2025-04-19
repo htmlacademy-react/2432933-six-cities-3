@@ -1,12 +1,16 @@
 enum NameSpace {
-  OFFER = 'offer',
-  OFFERS = 'offers'
+  Offer = 'offer',
+  Offers = 'offers',
+  Card = 'card',
+  Toast = 'toast',
+  Favorites = 'favorites',
+  Auth = 'auth',
 }
 
 const RequestStatus = {
-  SUCCESS: 'success',
-  LOADING: 'loading',
-  INITIAL: 'initial',
+  Success: 'success',
+  Loading: 'loading',
+  Initial: 'initial',
 };
 
 export { NameSpace, RequestStatus };

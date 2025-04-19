@@ -20,8 +20,8 @@ const FavoriteTitle = () => {
       <button
         className={clsx('offer__bookmark-button button', {'offer__bookmark-button--active' : isFavorite})}
         type="button"
-        onClick={ handleFavoriteClick }
-        disabled = { status === RequestStatus.LOADING}
+        onClick={handleFavoriteClick}
+        disabled = {status === RequestStatus.Loading}
       >
         <svg className="offer__bookmark-icon" width="31" height="33">
           <use xlinkHref="#icon-bookmark"></use>

@@ -4,7 +4,7 @@ import authReducer from './auth/auth-reducer';
 import favoritesReducer from './favorite/favorites-reducer';
 import offerReducer from './offer/offer-reducer';
 import activeCardReducer from './active-card/card-reducer';
-import toastReducer from './toast.reducer';
+import toastReducer from './toast-reducer/toast.reducer';
 
 
 const rootReducers = combineReducers({

@@ -1,14 +1,14 @@
 import { TypePlace } from '../../types/place-type/place-type';
 import PlacesCardInfo from '../places-card-info/places-card-info';
 
-type classNames = {
+type ClassNames = {
   container: string;
   imageWrapper: string;
 }
 
 type PlacesListProps = {
   places: TypePlace[];
-  classNames: classNames;
+  classNames: ClassNames;
 };
 
 const PlacesList = ({ places, classNames } :PlacesListProps) => (

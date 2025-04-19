@@ -1,38 +1,17 @@
-import MockAdapter from 'axios-mock-adapter';
-import { ThunkDispatch } from 'redux-thunk';
-import thunk from 'redux-thunk';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { Action } from 'redux';
-import { createAPI } from '../api';
-import { State } from '../../types/state';
-import { AuthorizationStatus } from '../../components/const';
-import { routeList } from './route-list';
-import { checkAuthAction, loginAction, logoutAction} from './user-process';
-import { redirectToRoute } from '../../store/redirect-to-route';
-import { getFavoriteAction } from './favorite-action';
-import * as tokenStorage from '../../services/token';
-
-type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
-const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
-
-const initialState = {
-  user: null,
-  isAuth: false,
-  authStatus: AuthorizationStatus.Unknown,
-
-};
+import { routeList } from '../route-list';
+import { checkAuthAction, loginAction, logoutAction} from './user-process.action';
+import { redirectToRoute } from '../../../store/redirect-to-route';
+import { getFavoriteAction } from '../favorites-action/favorite-action';
+import * as tokenStorage from '../../token';
+import { setupMockStore, extractActionsTypes } from '../../test-helpers';
 
 
 describe('Async actions', () => {
-  const axios = createAPI();
-  const mockAxiosAdapter = new MockAdapter(axios);
-
-  const middleware = [thunk.withExtraArgument(axios)];
-  const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
+  const { mockStoreCreator, mockAxiosAdapter} = setupMockStore();
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
-    store = mockStoreCreator({ authStatus: { ...initialState }});
+    store = mockStoreCreator();
   });
 
   describe('Async actions Offer', () => {
@@ -97,6 +76,7 @@ describe('Async actions', () => {
 
       await store.dispatch(logoutAction());
       const actions = store.getActions();
+
       expect(extractActionsTypes(actions)).toEqual([ logoutAction.pending.type, logoutAction.fulfilled.type ]);
     });
 
@@ -105,6 +85,7 @@ describe('Async actions', () => {
 
       await store.dispatch(logoutAction());
       const actions = store.getActions();
+
       expect(extractActionsTypes(actions)).toEqual([ logoutAction.pending.type, logoutAction.rejected.type ]);
     });
 

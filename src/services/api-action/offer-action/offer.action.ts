@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkApiConfig } from './api-config';
-import { Offer } from '../../types/offer-type/offer-type';
-import { TypePlace } from '../../types/place-type/place-type';
-import { routeList } from './route-list';
-import { Comment } from '../../types/offer-type/comment-type';
-import { handleApiError } from '../../utils/handle-api-error';
-import { redirectToRoute } from '../../store/redirect-to-route';
-import { AppRoute } from '../../components/const';
+import { ThunkApiConfig } from '../api-config';
+import { Offer } from '../../../types/offer-type/offer-type';
+import { TypePlace } from '../../../types/place-type/place-type';
+import { routeList } from '../route-list';
+import { Comment } from '../../../types/offer-type/comment-type';
+import { handleApiError } from '../../../utils/handle-api-error';
+import { redirectToRoute } from '../../../store/redirect-to-route';
+import { AppRoute } from '../../../components/const';
 
 const errorMessage = {
   getOffer: {

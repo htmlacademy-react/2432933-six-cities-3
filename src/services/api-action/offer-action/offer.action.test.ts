@@ -1,27 +1,15 @@
-import MockAdapter from 'axios-mock-adapter';
-import thunk from 'redux-thunk';
-import { configureMockStore } from '@jedmao/redux-mock-store';
-import { Action } from 'redux';
-import { createAPI } from '../api';
-import { State } from '../../types/state';
-import { makeFakeOffer } from '../../fake-data/fake-offer';
-import { routeList } from './route-list';
+import { makeFakeOffer } from '../../../fake-data/fake-offer';
+import { routeList } from '../route-list';
 import { addOfferComments, getOffer, getOfferComments, getOffersNearby } from './offer.action';
-import { ThunkDispatch } from 'redux-thunk';
-import { makeFakeComment, makeFakeOffers, makeFakeComments} from '../../fake-data/fakeOffers';
-import { redirectToRoute } from '../../store/redirect-to-route';
+import { makeFakeComment, makeFakeOffers, makeFakeComments} from '../../../fake-data/fakeOffers';
+import { redirectToRoute } from '../../../store/redirect-to-route';
+import { setupMockStore, extractActionsTypes } from '../../test-helpers';
 
-type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
-const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
 
 const OFFER_ID = 'offer-id-test';
 
 describe('Async actions', () => {
-  const axios = createAPI();
-  const mockAxiosAdapter = new MockAdapter(axios);
-
-  const middleware = [thunk.withExtraArgument(axios)];
-  const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
+  const { mockStoreCreator, mockAxiosAdapter} = setupMockStore();
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
